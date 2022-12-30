@@ -6,7 +6,7 @@ class Insertion(Rearrangement):
     """
     Insertion Class (subclass of Rearrangement)
 
-    Attributes:
+    Attributes
     ----------
     SubKind: str
         Subkind of Rearrangement. In this case: 'Insertion'.
@@ -17,7 +17,7 @@ class Insertion(Rearrangement):
     Length: int
         Length of the inserted sequence.
 
-    Methods:
+    Methods
     -------
     reconstruct(self, node: Node):
         Reconstruction of the DNA sequence involved in the current Insertion, of the considered
@@ -28,7 +28,7 @@ class Insertion(Rearrangement):
         Reconstruction of the DNA sequence involved in the current Insertion, in the considered
         cell. It takes the old sequence, and modifies it in order to add the Insertion.
 
-        Parameters:
+        Parameters
         ----------
             node (Node): node containing the involved cell.
         """
@@ -42,7 +42,7 @@ class Insertion(Rearrangement):
         It defines the 'SubKind', and initializes 'ChrID', 'Pos' and 'Length' according to the given
         parameters.
 
-        Parameters:
+        Parameters
         ----------
             ChrID (int): ID of the chromosome involved.
             Pos (int): Initial position of the inserted sequence.

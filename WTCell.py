@@ -7,7 +7,7 @@ class WT_Cell(Cell):
     """
     Mutant Cell Class (subclass of Cell)
 
-    Attributes:  
+    Attributes
     ----------
     kind: str
         Describes the kind of cell: 'Wild Type' in this case.
@@ -21,7 +21,7 @@ class WT_Cell(Cell):
         Defines the kind of the cell as "Wild Type", and initializes its generation and DNA 
         depending on the given parameters.
 
-        Parameters:
+        Parameters
         ----------
             n_chromosomes (int):
                 Number of Chromosomes composing in the cell DNA.

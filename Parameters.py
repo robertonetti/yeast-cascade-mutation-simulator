@@ -2,7 +2,7 @@ from Utility import Utility
 """
 Module containing all the input parameters of the 'Simulator' class.
 
-Parameters: 
+Parameters
 ----------
 number_of_generations (int): Number of generations to be simulated.
 average_events_number (int): average number of events for each cell duplication.

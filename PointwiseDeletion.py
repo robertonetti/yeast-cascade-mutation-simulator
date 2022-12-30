@@ -5,7 +5,7 @@ class PointDeletion(Mutation):
     """
     Pontwise Deletion Class (subclass of Mutation)
 
-    Attributes:
+    Attributes
     ----------
     SubKind: str
         Subkind of Rearrangement. In this case: Pointwise Deletion
@@ -14,7 +14,7 @@ class PointDeletion(Mutation):
     Pos: int
         Position of the deleted DNA base.
 
-    Methods:
+    Methods
     -------
     reconstruct(self, node: Node):
         Reconstruction of the DNA sequence involved in the current PointwiseDeletion, of the 
@@ -26,7 +26,7 @@ class PointDeletion(Mutation):
         considered cell. It takes the old sequence, and modifies it in order to add the
         PointwiseDeletion.
 
-        Parameters:
+        Parameters
         ----------
             node (Node): node containing the involved cell.
         """
@@ -39,7 +39,7 @@ class PointDeletion(Mutation):
         It defines the 'SubKind', and initializes 'ChrID' and 'Pos' according to the given 
         parameters.
 
-        Parameters:
+        Parameters
         ----------
             ChrID (int): ID of the chromosome involved.
             Pos (int): position of the deleted DNA base.

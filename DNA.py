@@ -2,7 +2,7 @@ class DNA:
     """
     DNA Class
     
-    Attributes:
+    Attributes
     ----------
     CHRs : list
         List containing the chromosomes of the cell.
@@ -13,7 +13,7 @@ class DNA:
         """
         It initializes the attribute 'CHRs' according to the parameter "chromosomes" given.
 
-        Parameters:
+        Parameters
         ----------
             chromosomes (list): list of chromosomes (class Chromosome).
         """

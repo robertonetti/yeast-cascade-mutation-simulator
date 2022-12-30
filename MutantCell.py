@@ -14,7 +14,7 @@ class MUT_Cell(Cell):
     """
     Mutant Cell Class (subclass of Cell)
 
-    Attributes:  
+    Attributes
     ----------
     kind: str
         It describes the kind of cell: 'Mutant' in this case.
@@ -30,7 +30,7 @@ class MUT_Cell(Cell):
         It defines the kind of the cell as "Mutant", and initializes its 'generation', 'DNA' and 
         'events' depending on the given parameters.
 
-        Parameters:
+        Parameters
         ----------
             DNA (DNA):
                 Contains the DNA of the cell. In particular its chromosomes and their sequences.

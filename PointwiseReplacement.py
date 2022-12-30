@@ -6,7 +6,7 @@ class PointReplacement(Mutation):
     """
     Pontwise Replacement Class (subclass of Mutation)
 
-    Attributes:
+    Attributes
     SubKind: str
         Subkind of Rearrangement. In this case: Pointwise Replacement
     ChrID: int
@@ -14,7 +14,7 @@ class PointReplacement(Mutation):
     Pos: int
         Position of the replaced DNA base.
 
-    Methods:
+    Methods
     reconstruct(self, node: Node):
         Reconstruction of the DNA sequence involved in the current PointwiseReplacement, of the 
         considered cell.
@@ -25,7 +25,7 @@ class PointReplacement(Mutation):
         considered cell. It takes the old sequence, and modifies it in order to add the
         PointwiseReplacement.
 
-        Parameters:
+        Parameters
         ----------
             node (Node): node containing the involved cell.
         """
@@ -41,7 +41,7 @@ class PointReplacement(Mutation):
         It defines the 'SubKind', and initializes 'ChrID' and 'Pos' according to the given 
         parameters.
 
-        Parameters:
+        Parameters
         ----------
             ChrID (int): ID of the chromosome involved.
             Pos (int): position of the replaced DNA base.

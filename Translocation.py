@@ -6,7 +6,7 @@ class Translocation(Rearrangement):
     """
     Translocation Class (subclass of Rearrangement)
 
-    Attributes:
+    Attributes
     ----------
     SubKind: str
         Subkind of Rearrangement. In this case: Translocation
@@ -19,7 +19,7 @@ class Translocation(Rearrangement):
     FinalPos: int
         Initial position of the translocated sequence, after translocation.
 
-    Methods:
+    Methods
     -------
     reconstruct(self, node: Node):
         Reconstruction of the DNA sequence involved in the current Translocation, of the considered
@@ -30,7 +30,7 @@ class Translocation(Rearrangement):
         Reconstruction of the DNA sequence involved in the current Translocation, in the considered
         cell. It takes the old sequence, and modifies it in order to add the Translocation.
 
-        Parameters:
+        Parameters
         ----------
             node (Node): node containing the involved cell.
         """
@@ -44,7 +44,7 @@ class Translocation(Rearrangement):
         Defines the SubKind, and initializes ChrID, InitPos, Length, FinalPos according to the given
         parameters.
 
-        Parameters:
+        Parameters
         ----------
             ChrID (int): ID of the chromosome involved.
             InitPos (int): Initial position of the translocated sequence, before translocation.

@@ -6,7 +6,7 @@ class Node():
     attribute (which are nodes in turn) it is possible to access the entire Binary Tree of which the
     current node is the root. 
 
-    Attributes:
+    Attributes
     ----------
     data: Cell 
         It is the content of the node. In this case a cell.
@@ -17,7 +17,7 @@ class Node():
     right: Node
         Right doughter node of the current node.
 
-    Methods:
+    Methods
     -------
     copy_chr_sequences(self, parent)
         Copies the DNA sequences of the cell contained in the parent node and adds them to the cell
@@ -27,7 +27,7 @@ class Node():
         """
         Copies the DNA sequences of the parent cell, in the current doughter node.
 
-        Paremeters:
+        Paremeters
         ----------
             parent (Node): parent node from which the DNA sequences are copied.
         """

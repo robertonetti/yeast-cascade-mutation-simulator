@@ -5,7 +5,7 @@ class ReciprocalTranslocation(Rearrangement):
     """
     Reciprocal Translocation Class (subclass of Rearrangement)
 
-    Attributes:
+    Attributes
     ----------
     SubKind: str
         Subkind of Rearrangement. In this case: 'Translocation'
@@ -21,7 +21,7 @@ class ReciprocalTranslocation(Rearrangement):
         Initial position (on the second chromosome) of the translocated sequence, after 
         translocation.
 
-    Methods:
+    Methods
     -------
     reconstruct(self, node: Node)
         Reconstruction of the DNA sequence involved in the current ReciprocalTranslocation, of the 
@@ -33,7 +33,7 @@ class ReciprocalTranslocation(Rearrangement):
         considered cell. It takes the old sequence, and modifies it in order to add the 
         ReciprocalTranslocation.
 
-        Parameters:
+        Parameters
         ----------
             node (Node): node containing the involved cell.
         """
@@ -49,7 +49,7 @@ class ReciprocalTranslocation(Rearrangement):
         It defines the 'SubKind', and initializes 'ChrID', 'InitPos', 'Length', 'FinalPos' according
         to the given parameters.
 
-        Parameters:
+        Parameters
         ----------
             ChrID (int): IDs of the chromosomes involved. First the one from which the sequence is 
                          deleted, and second the one in which is inserted.

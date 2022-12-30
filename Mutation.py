@@ -4,14 +4,14 @@ class Mutation(Event):
     """
     Mutation Class (sublass of Event)
 
-    Attributes:
+    Attributes
     ----------
     kind : str
         Kind of event: in this case 'Mutation'.
     chr_id : int
         ID of the involved chromosome.
 
-    Subclasses:
+    Subclasses
     ----------
         PointwiseInsertion
         PointwiseDeletion

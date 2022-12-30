@@ -4,7 +4,7 @@ class Chromosome:
     """
     Chromosome Class
     
-    Attributes:
+    Attributes
     ----------
     ID : int
         ID of the considered chromosome.
@@ -18,11 +18,11 @@ class Chromosome:
         Checks if the "ID" of the chromosome is among the possible ones. Then initializes the "ID"
         and its "length" based on the given vector "chromosome_lenghts".
 
-        Parameters:
+        Parameters
         ----------
             ID (int): ID of the considered chromosome.
 
-        Raises:
+        Raises
         ------
             Exception
                 If the chromosome ID is larger than the number of chromosomes.

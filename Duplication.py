@@ -5,7 +5,7 @@ class Duplication(Rearrangement):
     """
     Duplication Class (subclass of Rearrangement)
 
-    Attributes:
+    Attributes
     ----------
     SubKind: str
         Subkind of Rearrangement. In this case: 'Duplication'
@@ -18,7 +18,7 @@ class Duplication(Rearrangement):
     FinalPos: int
         Initial position of the inserted sequence, after duplication.
 
-    Methods:
+    Methods
     -------
     reconstruct(self, node: Node):
         Reconstruction of the DNA sequence involved in the current Duplication, of the considered
@@ -29,7 +29,7 @@ class Duplication(Rearrangement):
         Reconstruction of the DNA sequence involved in the current Duplication, in the considered
         cell. It takes the old sequence, and modifies it in order to add the Duplication.
 
-        Parameters:
+        Parameters
         ----------
             node (Node): node containing the involved cell.
         """
@@ -44,7 +44,7 @@ class Duplication(Rearrangement):
         It defines the 'SubKind', and initializes 'ChrID', 'InitPos', 'Length', 'FinalPos' according 
         to the given parameters.
 
-        Parameters:
+        Parameters
         ----------
             ChrID (int): ID of the chromosome involved.
             InitPos (int): Initial position of the duplicated sequence, before duplication.

@@ -2,12 +2,12 @@ class Event:
     """
     Event Class
     
-    Attributes:
+    Attributes
     ----------
     kind : str
         It defines the kind of the event. (default: None)
 
-    Subclasses:
+    Subclasses
     ----------
         Rearrangement
         Mutation

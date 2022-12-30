@@ -21,7 +21,7 @@ class Simulator():
     It simulates cell duplication up to the selected number of generations. It then reconstructs the
     DNA sequences considering all mutations and rearrangements added by the simulation.
     
-    Attributes:
+    Attributes
     ----------
     parent : Node
         It ontains the ancestor (WT) cell, from which it is possible to acces the whole tree of cells
@@ -40,12 +40,12 @@ class Simulator():
         List of the standard deviation of the chromosome lenght for each chromosome. Computed over 
         the last generation of cells.
 
-    General Methods:
+    General Methods
     ---------------
     leaves_collector(self, cell: Cell)
         It appends to a list all the leaves of the simulation.
 
-    Methods Generating Random Rearrangement:
+    Methods Generating Random Rearrangement
     ---------------------------------------
     rand_insertion(self, cell: Cell, length_extraction_method)
         It generates a random Insertion, according to a given distirbution. Then calls the function 
@@ -63,7 +63,7 @@ class Simulator():
         It generates a random Duplication, according to a given distirbution. Then calls the function
         that adds it to the events of the considered cell.
 
-    Methods Generating Random Mutation:
+    Methods Generating Random Mutation
     ----------------------------------
     rand_point_insertion(self, cell: Cell)
         It generates a random Pointwise Insertion, drawing its position from a Uniform distribution.
@@ -75,7 +75,7 @@ class Simulator():
         It generates a random Pointwise Replacement, drawing its position from a Uniform distribution.
         Then calls the function that adds it to the events of the considered cell.
 
-    Methods for Cell Duplication & Growth:
+    Methods for Cell Duplication & Growth
     -------------------------------------
     random_choice(self, cell: Cell, cumulative_list :list, del_len_distrib, ins_len_distrib,
                   transl_len_distrib, rec_transl_len_distrib, dupl_len_distrib)
@@ -96,7 +96,7 @@ class Simulator():
         It saves in an array all the leaves of the last generaitons and computes averages and 
         standard deviations on the chromosomes and genome lengths.
 
-    Methods for Cell Sequences Reconstruction:
+    Methods for Cell Sequences Reconstruction
     -----------------------------------------
     WT_sequence_initializer(self, cell: WT_Cell)
         Given a WT cell, it fills each of the chromosomes of the WT_Cell.DNA.CHRs attribute with the
@@ -113,7 +113,7 @@ class Simulator():
         Given a path and the total number of simulated generations 'n_generations', this function 
         reconstructs the sequence of the leaf corresponding to the path.
     
-    Methods to compute statistics:
+    Methods to compute statistics
     -----------------------------
     update_average_genome_length(self, node: Node)
         It updates the length of the whole genome in order to comute the average.
@@ -126,7 +126,7 @@ class Simulator():
         """
         It appends to a list all the leaves of the simulation.
 
-        Parameters:
+        Parameters
         ----------
             cell (Cell): cell we want to add to the list of leaves
         """
@@ -139,7 +139,7 @@ class Simulator():
         It generates a random Insertion, according to a given distirbution. Then calls the function 
         that adds it to the events of the considered cell.
 
-        Parameters:
+        Parameters
         ----------
             cell (Cell): considered cell.
             length_extraction_method (Method): probability distribution for the extraction of the 
@@ -156,7 +156,7 @@ class Simulator():
         It generates a random Deletion, according to a given distirbution. Then calls the function 
         that adds it to the events of the considered cell.
 
-        Parameters:
+        Parameters
         ----------
             cell (Cell): considered cell.
             length_extraction_method (Method): probability distribution for the extraction of the 
@@ -181,7 +181,7 @@ class Simulator():
         It generates a random Translocation, according to a given distirbution. Then calls the function 
         that adds it to the events of the considered cell.
 
-        Parameters:
+        Parameters
         ----------
             cell (Cell): considered cell.
             length_extraction_method (Method): probability distribution for the extraction of the 
@@ -203,7 +203,7 @@ class Simulator():
         It generates a random Reciprocal Translocation, according to a given distirbution. Then calls
         the function that adds it to the events of the considered cell.
 
-        Parameters:
+        Parameters
         ----------
             cell (Cell): considered cell.
             length_extraction_method (Method): probability distribution for the extraction of the 
@@ -225,7 +225,7 @@ class Simulator():
         It generates a random Duplication, according to a given distirbution. Then calls the function 
         that adds it to the events of the considered cell.
 
-        Parameters:
+        Parameters
         ----------
             cell (Cell): considered cell.
             length_extraction_method (Method): probability distribution for the extraction of the 
@@ -245,7 +245,7 @@ class Simulator():
         It generates a random Pointwise Insertion, drawing its position from a Uniform distribution.
         Then calls the function that adds it to the events of the considered cell.
 
-        Parameters:
+        Parameters
         ----------
             cell (Cell): considered cell.
         """
@@ -258,7 +258,7 @@ class Simulator():
         It generates a random Pointwise Deletion, drawing its position from a Uniform distribution.
         Then calls the function that adds it to the events of the considered cell.
 
-        Parameters:
+        Parameters
         ----------
             cell (Cell): considered cell.
         """
@@ -271,7 +271,7 @@ class Simulator():
         It generates a random Pointwise Replacement, drawing its position from a Uniform distribution.
         Then calls the function that adds it to the events of the considered cell.
 
-        Parameters:
+        Parameters
         ----------
             cell (Cell): considered cell.
         """
@@ -287,7 +287,7 @@ class Simulator():
         Given that an event happens, this funciton chooses which event happen accordinf to the
         cumulative probability given in 'cumulative_list'.
 
-        Parameters:
+        Parameters
         ----------
             cell (Cell): considered cell.
             cumulative_list (list): list containing the cumulative probability of the possible 
@@ -325,7 +325,7 @@ class Simulator():
         (n_ave_method), it creates two doughter nodes, and calls 'random_choice' to add the 
         extracted number of events to them.
 
-        Parameters:
+        Parameters
         ----------
             node (Node): parent node that will be duplicated in this function.
             cumulative_list (list): list containing the cumulative probability of the possible 
@@ -340,7 +340,7 @@ class Simulator():
             n_event_method (Method): probability distribution of the number of events in one cell
                                      duplication.
 
-        Returns:
+        Returns
         -------
             node.left (Cell): left doughter cell of the parent one, with the its list of events.
             node.right (Cell): right doughter cell of the parent one, with the its list of events.
@@ -367,7 +367,7 @@ class Simulator():
         It saves in an array all the leaves of the last generaitons and computes averages and 
         standard deviations on the chromosomes and genome lengths.
 
-        Parameters:
+        Parameters
         ----------
             node (Node): parent node that will be duplicated in this function.
             n_generations (int): number of generations to be simulated. 
@@ -403,7 +403,7 @@ class Simulator():
         Given a WT cell, it fills each of the chromosomes of the WT_Cell.DNA.CHRs attribute with the
         corresponding sequence according to the 'chromosome_table' parameter.
 
-        Parameters:
+        Parameters
         ----------
             cell (WT_Cell): Wild Type cell to be initialized with its DNA sequences.
             chromosome_table (list): list of tuple. Each tuple contains the chromosome ID and its
@@ -417,12 +417,12 @@ class Simulator():
         It copies the DNA sequences from the parent to the doughter cell. Then it modifies them 
         according to the new events present in the doughter cell.
 
-        Parameters: 
+        Parameters
         ----------
             parent (Node): parent cell from which the DNA sequences will be copied.
             doughter (Node): doughter cell in which the DNA sequences will be copied and modified.
 
-        Methods: 
+        Methods
         -------
             check_chr_length(): cheks if the parent cell has the correct number of DNA bases.
         """
@@ -430,7 +430,7 @@ class Simulator():
             """
             It checks if the parent cell has the correct number of DNA bases.
 
-            Raises:
+            Raises
             ------
                 Exception
                     If the chromosome length does not corresponde to the effective length of the
@@ -452,7 +452,7 @@ class Simulator():
         parent, up to 'n_generations' generations. In the end only the leaves of the 'n_generation' 
         generation will contain the modified sequences.
 
-        Parameters:
+        Parameters
         ----------
             parent (Node): ancestor (WT) cell from which the recostruction will begin.
             n_generations (int): number of generations that we want to reconstruct.
@@ -482,17 +482,17 @@ class Simulator():
         Given a path and the total number of simulated generations 'n_generations', this function 
         reconstructs the sequence of the leaf corresponding to the path.
 
-        Parameters:
+        Parameters
         ----------
             path (list): list of 0 or 1. 0 corresponds to "left", 1 to "right".
             chromosome_table (list): list of tuple. Each tuple contains the chromosome ID and its
                                      sequence.
 
-        Returns:
+        Returns
         -------
             current_node (Node): leaf corresponding to the selected path.
 
-        Raises:
+        Raises
         ------
             Exception
                 If the path's length is larger than the number of simulated generations.
@@ -528,7 +528,7 @@ class Simulator():
         """
         Updates the length of the whole genome in order to comute the average.
 
-        Parameters:
+        Parameters
         ----------
             node (Node): node considered for the computation of the average.
         """
@@ -539,7 +539,7 @@ class Simulator():
         """
         Updates the length of each chromosome in order to comute the average.
 
-        Parameters:
+        Parameters
         ----------
             node (Node): node considered for the computation of the average.
         """
@@ -550,7 +550,7 @@ class Simulator():
         """
         Computes the Standard Deviation of the final length of each Chromosome.
 
-        Parameters:
+        Parameters
         ----------
             n_chr (int): number of chromosomes.
             n_gen (int). number of generations.            
@@ -574,7 +574,7 @@ class Simulator():
         genome and chromosome lengths and the array containing the leaves. Then simulates the cell 
         duplication up to "self.generation" generations, and computes the statistics.
 
-        Parameters:
+        Parameters
         ----------
             chromosome_table (list): list of tuple. Each tuple contains the chromosome ID and its
                                      sequence.

@@ -10,13 +10,13 @@ class Utility:
         DNA duplication, or the length of the rearrangement;
     - some methods to randomly initialize the WT chromosomes and their sequence.
     
-    Attributes: 
+    Attributes
     ----------
         output : str
             It contains the output of the command 'top' of the MacOS zsh which monitors the activity 
             of all the active processes.
 
-    Methods that communicate with zsh for RAM usage: 
+    Methods that communicate with zsh for RAM usage
     -----------------------------------------------
         get_pid(self)
             It returns the process ID <pid> of the current python process. 
@@ -29,7 +29,7 @@ class Utility:
             Calls the method 'get_output'. Then it elaborates the output to compute the memory used
             by the python process, and the total amount of used RAM.
 
-    Probability distributions methods:
+    Probability distributions methods
     ---------------------------------
     int_trunc_exp(a :int, b :int)
         It extracts the length of the rearrangement (integer number) from an exponential 
@@ -41,7 +41,7 @@ class Utility:
         It extracts the number of events in one cell duplication (integer number) from the Poisson 
         distribution with average "n_ave".
 
-    Methods for WT sequences initialization:
+    Methods for WT sequences initialization
     ---------------------------------------
     random_sequence(self, n_bases :int) -> list
         It creates a DNA sequence of random bases of length 'n_bases'.
@@ -60,7 +60,7 @@ class Utility:
         """
         It returns the process ID <pid> of the current python process. 
 
-        Returns: 
+        Returns
         -------
             pid (int): process ID of the python3.8 process.
         """
@@ -74,7 +74,7 @@ class Utility:
         """
         It returns the output of the 'top' command as a string.
 
-        Returns:
+        Returns
         -------
             self.output (str): splitted output of the command 'top' of the MacOS zsh.
         """
@@ -87,12 +87,12 @@ class Utility:
         bytes. The original format is: 'number' 'unit'. Where 'number' is an integer while 'unit'
         could be: 'K' (Kb), 'M' (Mb), 'G' (Gb).
 
-        Parameters:
+        Parameters
         ----------
             num (str): is the number of Kb, Mb or Gb used by the process.
             unit (str): is the unit 'K','M', or 'G' which respectively are Kb, Mb and Gb.
 
-        Returns:
+        Returns
         -------
             It returns the product between the 'number' and the respective of 1 unit in bytes.
         """
@@ -106,7 +106,7 @@ class Utility:
         Calls the method 'get_output'. Then it elaborates the output to compute the memory used
         by the python process, and the total amount of used RAM.
         
-        Returns: 
+        Returns
         -------
             tot_mem (float): total RAM usage in Mb.
             py_mem (float): RAM used by the process 'python3.8' in Mb.
@@ -127,16 +127,16 @@ class Utility:
         It extracts the length of the rearrangement (integer number) from an exponential distribution
         truncated between "a" and "b".
 
-        Parameters:
+        Parameters
         ----------
             a (int): left extreme of the distribution domain.
             b (int): right extreme of the distribution domain.
 
-        Returns:
+        Returns
         -------
             rands (int): extracted number.
 
-        Raises:
+        Raises
         ------
             Exception
                 If 'a' or 'b' are negative.
@@ -153,16 +153,16 @@ class Utility:
         It extracts the length of the rearrangement (integer number) from a uniform distribution 
         truncated between "a" and "b".
 
-        Parameters:
+        Parameters
         ----------
             a (int): left extreme of the distribution domain.
             b (int): right extreme of the distribution domain.
 
-        Returns:
+        Returns
         -------
             rands (int): extracted number.
 
-        Raises:
+        Raises
         ------
             Exception
                 If 'a' or 'b' are negative.
@@ -177,11 +177,11 @@ class Utility:
         It extracts the number of events in one cell duplicaiton (integer number) from the Poisson 
         distribution with average "n_ave".
 
-        Parameters:
+        Parameters
         ----------
             n_ave (int): average number of events in one cell duplication.
 
-        Returns:
+        Returns
         -------
             n_events (int): extracted number of events.
         """
@@ -193,11 +193,11 @@ class Utility:
         """
         It creates a DNA sequence of random bases of length 'n_bases'. 
 
-        Parameters:
+        Parameters
         ----------
             n_bases (int): number of bases of the sequence we want to build.
 
-        Returns:
+        Returns
         -------
             sequence (list): generated sequence (list of strings).
         """
@@ -210,16 +210,16 @@ class Utility:
         """
         It creates a random DNA sequence of the respective length for each of the chromosomes.
 
-        Parameters:
+        Parameters
         ----------
             n_chromosomes (int): number of chromosomes for which we want to build the sequences.
             chromosome_lenghts (list): list of the lengths of the chromosomes considered.
 
-        Returns:
+        Returns
         -------
             reference_seqs (list): list containing the created sequences.
 
-        Raises:
+        Raises
         ------
             Exception
                 If the number of chromosomes is larger then the simulated ones.
@@ -234,12 +234,12 @@ class Utility:
         Given an array containing the lenghts of the chromosomes and the number of chromosomes, it
         creates a 'chromosome_table' with random sequences.
 
-        Parameters:
+        Parameters
         ----------
             chromosome_lengths: list containing the lengths of the chromosomes.
             n_chr (int): number of chromosomes.
 
-        Returns: 
+        Returns
         -------
             chromosome_table (list): list of tuple. Each tuple contains the chromosome ID and its
                                      sequence.
@@ -255,12 +255,12 @@ class Utility:
         Given an array containing the lenghts of the chromosomes and the number of chromosomes, it
         creates a 'chromosome_table' with sequences completely composed by the base 'A'.
 
-        Parameters:
+        Parameters
         ----------
             chromosome_lengths: list containing the lengths of the chromosomes.
             n_chr (int): number of chromosomes.
 
-        Returns: 
+        Returns
         -------
             chromosome_table (list): list of tuple. Each tuple contains the chromosome ID and its
                                      sequence.

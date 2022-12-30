@@ -5,7 +5,7 @@ class Deletion(Rearrangement):
     """
     Deletion Class (subclass of Rearrangement)
 
-    Attributes:
+    Attributes
     ----------
     SubKind: str
         Subkind of Rearrangement. In this case: 'Deletion'.
@@ -16,7 +16,7 @@ class Deletion(Rearrangement):
     Length: int
         Length of the deleted sequence.
 
-    Methods:
+    Methods
     -------
     reconstruct(self, node: Node):
         Reconstruction of the DNA sequence involved in the current Deletion, of the considered
@@ -27,7 +27,7 @@ class Deletion(Rearrangement):
         Reconstruction of the DNA sequence involved in the current Deletion, in the considered
         cell. It takes the old sequence, and modifies it in order to add the Deletion.
 
-        Parameters:
+        Parameters
         ----------
             node (Node): node containing the involved cell.
         """
@@ -39,7 +39,7 @@ class Deletion(Rearrangement):
         Defines the 'SubKind', and initializes 'ChrID', 'Pos' and 'Length' according to the given
         parameters.
 
-        Parameters:
+        Parameters
         ----------
             ChrID (int): ID of the chromosome involved.
             Pos (int): Initial position of the deleted sequence.
