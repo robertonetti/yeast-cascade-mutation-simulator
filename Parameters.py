@@ -37,11 +37,11 @@ dupl_len_distrib = Utility.int_trunc_exp
 
 chromosome_lengths = [int(5e5), int(5e5), int(5e5), int(5e5), int(5e5),int(5e5), int(5e5), int(5e5),
                     int(5e5), int(5e5),int(5e5), int(5e5), int(5e5), int(5e5), int(5e5), int(5e5),
-                    int(5e5), int(5e5), int(5e5), int(5e5)]         
+                    int(5e5), int(5e5)]         
 #chromosome_lengths = [int(100), int(100), int(100), int(100), int(100), int(100), int(100), int(100),
                     #  int(100), int(100), int(100), int(100), int(100), int(100), int(100), int(100),
                     #  int(100), int(100), int(100), int(100), int(100), int(100), int(100), int(100)]
                     
 chromosome_number = 16 
-chromosome_table = Utility.A_seq_initializer(chromosome_lengths, chromosome_number)
-#chromosome_table = Utility.random_seq_initializer(chromosome_lengths, chromosome_number)
+#chromosome_table = Utility.A_seq_initializer(chromosome_lengths)
+chromosome_table = Utility.random_seq_initializer(chromosome_lengths)

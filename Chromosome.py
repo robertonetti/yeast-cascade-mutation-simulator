@@ -1,4 +1,4 @@
-from Parameters import chromosome_table
+#from Parameters import chromosome_table
 
 class Chromosome:
     """
@@ -13,7 +13,7 @@ class Chromosome:
     sequence : str
         DNA sequence of the considered chromosome.
     """
-    def __init__(self, ID):
+    def __init__(self, ID, length):
         """
         Checks if the "ID" of the chromosome is among the possible ones. Then initializes the "ID"
         and its "length" based on the given vector "chromosome_lenghts".
@@ -21,20 +21,16 @@ class Chromosome:
         Parameters
         ----------
             ID (int): ID of the considered chromosome.
+            length (int): length of the considered chromosome.
 
         Raises
         ------
             Exception
-                If the chromosome ID is larger than the number of chromosomes.
-            Exception
                 The chromosome ID cannot be 0.
         """
-        if ID > len(chromosome_table) : raise Exception(f"ID is too large. \
-            ID can be from 1 to: {len(chromosome_table)}")
-        if ID <= 0 : raise Exception(f"ID cannot be 0. \
-            ID can be from 1 to: {len(chromosome_table)}")
+        if ID <= 0 : raise Exception(f"ID cannot be smaller than 0!")
         self.ID = ID
-        self.length = len(chromosome_table[ID - 1][1])
+        self.length = length
 
     sequence = None
 

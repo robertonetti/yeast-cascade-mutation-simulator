@@ -21,10 +21,12 @@ This project requires the following libraries:
 To run the project is sufficient to download all the files and put them togheter in the same folder.
 
 ## Usage:
+
 ### Data Structure:
-The core structure of the simulation is composed by a binary tree. Each object **node** in the tree is thought as a class containing three attributes: **node.left**, **node.right** and **node.data** (see Binary Tree.py). The first and the second attribute are node themselves and represent the two doughter nodes of the parent one. The last attribute **node.data**, contains the corresponding cell.\
-From the parent node (containing the initial Wild Type cell) is possible to access all the other nodes in the tree.
-#### Example:
+The central structure of the simulation consists of a binary tree. Each node in the tree is thought of as a class containing three attributes: **left**, **right** and **data** (see Binary Tree.py). The first and second attributes are actual nodes and represent the two largest nodes of the parent node. The last attribute **node.data**, contains the corresponding cell.
+From the parent node (containing the initial Wild Type cell), all other nodes in the tree can be accessed.
+
+##### Example:
 ```python 
 from Binary Tree import Node
 
@@ -33,8 +35,54 @@ parent.left, parent.right = Node(), Node() #define the doughter nodes
 ```
 
 ### Classes Structure:
+In this section I will very quickly explain the structure of the various classes in the project.
+The fundamental class is **Cell** which has two subclasses **WT_Cell** (Wild Type) and **MUT_Cell** (Mutated Cell). Both subclasses have an attribute called **DNA**, which is a class in turn containing a list of the different **Chromosomes**.
+In addition, only the **MUT_Cell** has as another attribute a list of **Event** representing the mutation events that happened to the respective cell. The **Event** class has two subclasses, the first called **Mutation** is in turn subdivided into: **PointwiseDeletion**, **PointwiseInsertion** and **PointwiseReplacement**. These are mutational events involving a single DNA base.
+The other subclass of **Event** is **Rarrangement**, which is divided into:
+**Deletion**, **Insertion**, **Translocation**, **TranslocationReciprocation** and **Duplication**. They can involve many DNA bases and more than one chromosome
 
-### Structure of the simulator:
+### Structure of the Simulator:
 The simulation is divided in two main steps: \
-**Step 1**: effective simulation of the cell divisions; \
-**Step 2**: reconstruction of the mutated sequences of the last generation of cells.
+**Step 1 (Simulation)**: effective simulation of the cell divisions; \
+**Step 2 (Reconstruction)**: reconstruction of the mutated sequences of the last generation of cells, or of the cell at the end of a selected path.
+#### Step 1 (Simulation):
+In this step we start from one Wild Type cell. After the initialization of the class according to the given parameters, we simulate its division up to the selected number of generations. For each cell division we randomly extract the number and the kinds of mutational events occurring in the respective two doughters (during the considered division). The events which will be stored in the attribute: **MUT_Cell.events**.
+##### Example:
+In this example we consider a WT cell with two chromosome, and a simulation of two generations.
+```python 
+from Simulator import Simulator
+from Utility import Utility
+
+# number of generations to be simulated
+number_of_generations = 2 
+# randomly initialize the chromosome and their sequences
+chromosome_lengths = [int(5e4), int(6e4)] # list containing the lengths of the chromosome
+chromosome_table = Utility.random_seq_initializer(chromosome_lengths)
+# Step 1 (Simulation)
+simul = Simulator(chromosome_table, number_of_generations)
+# access parent node and all the tree
+print(simul.parent.data) # WT cell
+print(simul.parent.left) # first generation left doughter
+print(simul.parent.left.right) # and so on...
+```
+
+#### Step 2 (Reconstruction):
+After **Step 1**, we end up with a binary tree which stores in each node, the events occurred in the corresponding cell between the previous division and the successive one. The aim of **Step 2** is to use the lists of events to reconstruct the actual DNA sequences (in the last generation cells), which are mutated with respect to the Wild Type.
+
+##### Example:
+```python 
+from Simulator import Simulator
+from Utility import Utility
+
+# Step 1 (Simulation)
+number_of_generations = 2 
+chromosome_lengths = [int(20), int(20)] 
+chromosome_table = Utility.random_seq_initializer(chromosome_lengths)
+simul = Simulator(chromosome_table, number_of_generations)
+# Step 2 (Reconstruction)
+simul.reconstructor(simul.parent, number_of_generations, chromosome_table)
+print(f"CHR1,  WT: {chromosome_table[0][1]}")
+print(f"CHR1, MUT: {simul.parent.left.right.data.DNA.CHRs[0].sequence}")
+```
+
+### Parameters of the Simulator:

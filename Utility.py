@@ -47,10 +47,10 @@ class Utility:
         It creates a DNA sequence of random bases of length 'n_bases'.
     reference_seq_builder(self, n_chromosomes: int, chromosome_lengths) -> list
         It creates a random DNA sequence of the respective length for each of the chromosomes.
-    random_seq_initializer(chromosome_lengths: list, n_chr: int)
+    random_seq_initializer(chromosome_lengths: list)
         Given an array containing the lenghts of the chromosomes and the number of chromosomes, it
         creates a 'chromosome_table' with random sequences.
-    A_seq_initializer(chromosome_lengths :list, n_chr: int)
+    A_seq_initializer(chromosome_lengths :list)
         Given an array containing the lenghts of the chromosomes and the number of chromosomes, it
         creates a 'chromosome_table' with sequences completely composed by the base 'A'.
     """
@@ -205,6 +205,8 @@ class Utility:
         sequence = ''.join(np.random.choice(bases, n_bases)) 
         return sequence
 
+
+# PROBABLY USELESS
     @staticmethod
     def reference_seq_builder(n_chromosomes: int, chromosome_lengths):
         """
@@ -229,7 +231,7 @@ class Utility:
         reference_seqs = [Utility.random_sequence(chromosome_lengths[n]) for n in range(n_chromosomes)]
         return reference_seqs
 
-    def random_seq_initializer(chromosome_lengths: list, n_chr: int):
+    def random_seq_initializer(chromosome_lengths: list):
         """
         Given an array containing the lenghts of the chromosomes and the number of chromosomes, it
         creates a 'chromosome_table' with random sequences.
@@ -237,20 +239,20 @@ class Utility:
         Parameters
         ----------
             chromosome_lengths: list containing the lengths of the chromosomes.
-            n_chr (int): number of chromosomes.
 
         Returns
         -------
             chromosome_table (list): list of tuple. Each tuple contains the chromosome ID and its
                                      sequence.
         """
+        n_chr = len(chromosome_lengths)
         chromosome_table = []
         id = 1
         for id in range(1, n_chr + 1):
             chromosome_table.append((id, Utility.random_sequence(chromosome_lengths[id - 1])))
         return chromosome_table
         
-    def A_seq_initializer(chromosome_lengths: list, n_chr: int):
+    def A_seq_initializer(chromosome_lengths: list):
         """
         Given an array containing the lenghts of the chromosomes and the number of chromosomes, it
         creates a 'chromosome_table' with sequences completely composed by the base 'A'.
@@ -258,13 +260,13 @@ class Utility:
         Parameters
         ----------
             chromosome_lengths: list containing the lengths of the chromosomes.
-            n_chr (int): number of chromosomes.
 
         Returns
         -------
             chromosome_table (list): list of tuple. Each tuple contains the chromosome ID and its
                                      sequence.
         """
+        n_chr = len(chromosome_lengths)
         chromosome_table = []
         id = 1
         for id in range(1, n_chr + 1):
