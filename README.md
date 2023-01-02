@@ -25,12 +25,12 @@ To run the project is sufficient to download all the files and put them togheter
 The core structure of the simulation is composed by a binary tree. Each object **node** in the tree is thought as a class containing three attributes: **node.left**, **node.right** and **node.data** (see Binary Tree.py). The first and the second attribute are node themselves and represent the two doughter nodes of the parent one. The last attribute **node.data**, contains the corresponding cell.\
 From the parent node (containing the initial Wild Type cell) is possible to access all the other nodes in the tree.
 #### Example:
-'''python
+```python 
 from Binary Tree import Node
 
 parent = Node() #define the parent node
 parent.left, parent.right = Node(), Node() #define the doughter nodes
-'''
+```
 
 ### Classes Structure:
 
