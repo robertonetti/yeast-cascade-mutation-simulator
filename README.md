@@ -69,7 +69,8 @@ print(simul.parent.left.right) # and so on...
 #### Step 2 (Reconstruction):
 After **Step 1**, we end up with a binary tree which stores in each node, the events occurred in the corresponding cell between the previous division and the successive one. The aim of **Step 2** is to use the lists of events to reconstruct the actual DNA sequences (in the last generation cells), which are mutated with respect to the Wild Type.
 
-##### Example:
+##### Example 1 (Complete Reconstruction):
+In this example the last generation is completely reconstructed.
 ```python 
 from Simulator import Simulator
 from Utility import Utility
@@ -83,6 +84,26 @@ simul = Simulator(chromosome_table, number_of_generations)
 simul.reconstructor(simul.parent, number_of_generations, chromosome_table)
 print(f"CHR1,  WT: {chromosome_table[0][1]}")
 print(f"CHR1, MUT: {simul.parent.left.right.data.DNA.CHRs[0].sequence}")
+```
+
+##### Example 2 (Path Reconstruction):
+In this example only the leaf corresponding to the given path has been reconstructed. Notice that in the path: \
+0 = left doughter \
+1 = right doughter \
+```python 
+from Simulator import Simulator
+from Utility import Utility
+
+# Step 1 (Simulation)
+number_of_generations = 2 
+chromosome_lengths = [int(20), int(20)] 
+chromosome_table = Utility.random_seq_initializer(chromosome_lengths)
+simul = Simulator(chromosome_table, number_of_generations)
+# Step 2 (Reconstruction)
+path = [0, 1] # select the path
+leaf = simul.path_reconstructor(path, chromosome_table) #reconstruction of the selected leaf
+print(f"CHR1,  WT: {chromosome_table[0][1]}")
+print(f"CHR1, leaf: {leaf.data.DNA.CHRs[0].sequence}")
 ```
 
 ### Parameters of the Simulator:
