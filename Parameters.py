@@ -29,11 +29,11 @@ cumulative_list = [ 1./8,    2./8,     3./8,       4./8,      5./8,    6./8,    
 
 n_events_distrib = Utility.poisson_events_number
 
-del_len_distrib = Utility.int_trunc_uniform
-ins_len_distrib = Utility.int_trunc_uniform
-transl_len_distrib = Utility.int_trunc_uniform
-rec_transl_len_distrib = Utility.int_trunc_uniform
-dupl_len_distrib = Utility.int_trunc_uniform
+del_len_distrib = Utility.int_trunc_exp
+ins_len_distrib = Utility.int_trunc_exp
+transl_len_distrib = Utility.int_trunc_exp
+rec_transl_len_distrib = Utility.int_trunc_exp
+dupl_len_distrib = Utility.int_trunc_exp
 
 chromosome_lengths = [int(5e5), int(5e5), int(5e5), int(5e5), int(5e5),int(5e5), int(5e5), int(5e5),
                     int(5e5), int(5e5),int(5e5), int(5e5), int(5e5), int(5e5), int(5e5), int(5e5),
