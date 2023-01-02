@@ -1,8 +1,11 @@
-# yeast-cascade-mutation-simulator
-Simulator for the cascade mutation effect of a yeast cell after DNA damage.
+# Yeast Cascade Mutation Simulator
+- Cosa fa, molto in generale
 
-## Simulator 
-Explain Simulator
+## Table of Contents:
+- Requirements;
+
+## Requirements
+
 
 ## Reconstruction
 How to reconstruct sequences
