@@ -41,6 +41,8 @@ In addition, only the **MUT_Cell** has as another attribute a list of **Event** 
 The other subclass of **Event** is **Rarrangement**, which is divided into:
 **Deletion**, **Insertion**, **Translocation**, **TranslocationReciprocation** and **Duplication**. They can involve many DNA bases and more than one chromosome
 
+![Classes](images/Classes%20Scheme.pdf)
+
 ### Structure of the Simulator:
 The simulation is divided in two main steps: \
 **Step 1 (Simulation)**: effective simulation of the cell divisions; \
@@ -81,7 +83,7 @@ chromosome_lengths = [int(20), int(20)]
 chromosome_table = Utility.random_seq_initializer(chromosome_lengths)
 simul = Simulator(chromosome_table, number_of_generations)
 # Step 2 (Reconstruction)
-simul.reconstructor(simul.parent, number_of_generations, chromosome_table)
+simul.reconstructor(simul.parent, number_of_generations, chromosome_table) # reconstruct last generation
 print(f"CHR1,  WT: {chromosome_table[0][1]}")
 print(f"CHR1, MUT: {simul.parent.left.right.data.DNA.CHRs[0].sequence}")
 ```
@@ -89,7 +91,8 @@ print(f"CHR1, MUT: {simul.parent.left.right.data.DNA.CHRs[0].sequence}")
 ##### Example 2 (Path Reconstruction):
 In this example only the leaf corresponding to the given path has been reconstructed. Notice that in the path: \
 0 = left doughter \
-1 = right doughter \
+1 = right doughter 
+
 ```python 
 from Simulator import Simulator
 from Utility import Utility
@@ -107,3 +110,17 @@ print(f"CHR1, leaf: {leaf.data.DNA.CHRs[0].sequence}")
 ```
 
 ### Parameters of the Simulator:
+ - **chromosome_table**: list of the chromosomes sequences with the respective chromosome ID. Each element of the list is a tuple;
+ - **number_of_generations**: represents the number of generations we want to simulate in **Step 1**;
+ - **average_events_number**: average number of events occuring in one cell during the duplication;
+ - **cumulative_list**: list containing the values of the cumulative distributions of the kind of event;
+ - **n_events_distrib**: probability distribution of the number of events (default Poisson);
+ - **del_len_distrib**: probability distribution of the deletion length;
+ - **ins_len_distrib**: probability distribution of the insertion length;
+ - **transl_len_distrib**: probability distribution of the translocation length;
+ - **rec_transl_len_distrib**: probability distribution of the reciprocal translocation length;
+ - **dupl_len_distrib**: probability distribution of the duplication length;
+ 
+ In case the **chromosome_table** is not given:
+ - **chromosome_lengths**: ordered list containing the lengths of the chromosomes considered;
+ - **chromosome_number**: total number of chromosomes considered;
