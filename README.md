@@ -18,7 +18,7 @@ This project requires the following libraries:
 - copy (https://docs.python.org/3/library/copy.html);
 
 ## Installation:
-To run the project is sufficient to download all the files and put them togheter in the same folder.
+To run the project, simply download the **code** folder. It contains all the necessary files.git
 
 ## Usage:
 
