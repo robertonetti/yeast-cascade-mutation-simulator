@@ -41,7 +41,7 @@ In addition, only the **MUT_Cell** has as another attribute a list of **Event** 
 The other subclass of **Event** is **Rarrangement**, which is divided into:
 **Deletion**, **Insertion**, **Translocation**, **TranslocationReciprocation** and **Duplication**. They can involve many DNA bases and more than one chromosome
 
-![Classes](images/Classes%20Scheme.pdf)
+![Classes](images/Classes%20Scheme.png)
 
 ### Structure of the Simulator:
 The simulation is divided in two main steps: \
