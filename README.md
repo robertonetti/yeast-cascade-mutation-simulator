@@ -41,7 +41,9 @@ In addition, only the **MUT_Cell** has as another attribute a list of **Event** 
 The other subclass of **Event** is **Rarrangement**, which is divided into:
 **Deletion**, **Insertion**, **Translocation**, **TranslocationReciprocation** and **Duplication**. They can involve many DNA bases and more than one chromosome
 
-![Classes](images/Classes%20Scheme.png)
+![Simulator](images/Simulator.png)
+![Cells](images/Cells.png)
+![Nodes](images/Nodes.png)
 
 ### Structure of the Simulator:
 The simulation is divided in two main steps: \
@@ -124,3 +126,5 @@ print(f"CHR1, leaf: {leaf.data.DNA.CHRs[0].sequence}")
  In case the **chromosome_table** is not given:
  - **chromosome_lengths**: ordered list containing the lengths of the chromosomes considered;
  - **chromosome_number**: total number of chromosomes considered;
+
+ ### Utility Class:
