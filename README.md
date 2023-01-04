@@ -128,7 +128,7 @@ print(f"CHR1, leaf: {leaf.data.DNA.CHRs[0].sequence}")
  - **dupl_len_distrib**: probability distribution of the Duplication length;
 
 **Note**: the probability distributions of the Rearrangements length can be chosen between: **discrete truncated uniform** and **discrete truncated exponential**. In the last case it is possible to choose the parameter $\tau$ of the truncated exponential distribution:\
-$p(n) = \frac{1}{Z}\frac{1}{\tau} \cdot e^{-\frac{n}{\tau}}$  where  $Z = e^{-\frac{a}{\tau}} - e^{-\frac{b}{\tau}}$. Truncated in the interval $[a,b]$.
+$p(n) = \frac{1}{Z} \cdot e^{-\frac{n}{\tau}}$  where  $Z = e^{-\frac{a}{\tau}} - e^{-\frac{b}{\tau}}$. Truncated in the interval $[a,b]$.
  
  In case the **chromosome_table** is not given (see "Utility Class"):
  - **chromosome_lengths**: ordered list containing the lengths of the chromosomes considered;
