@@ -41,7 +41,7 @@ class Utility:
         It extracts the number of events in one cell duplication (integer number) from the Poisson 
         distribution with average "n_ave".
 
-    Methods for WT sequences initialization
+    Methods Chromosome Sequences Initialization
     ---------------------------------------
     random_sequence(self, n_bases :int) -> list
         It creates a DNA sequence of random bases of length 'n_bases'.

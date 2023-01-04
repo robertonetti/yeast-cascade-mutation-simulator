@@ -18,7 +18,7 @@ This project requires the following libraries:
 - copy (https://docs.python.org/3/library/copy.html);
 
 ## Installation:
-To run the project, simply download the **code** folder. It contains all the necessary files.git
+To run the project, simply download the **code** folder. It contains all the necessary files.
 
 ## Usage:
 
@@ -48,33 +48,35 @@ The other subclass of **Event** is **Rarrangement**, which is divided into:
 ### Structure of the Simulator:
 The simulation is divided in two main steps: \
 **Step 1 (Simulation)**: effective simulation of the cell divisions; \
-**Step 2 (Reconstruction)**: reconstruction of the mutated sequences of the last generation of cells, or of the cell at the end of a selected path.
+**Step 2 (Reconstruction)**: reconstruction of the mutated sequences of the last cell generation or the cell at the end of a selected pathway.
 #### Step 1 (Simulation):
-In this step we start from one Wild Type cell. After the initialization of the class according to the given parameters, we simulate its division up to the selected number of generations. For each cell division we randomly extract the number and the kinds of mutational events occurring in the respective two doughters (during the considered division). The events which will be stored in the attribute: **MUT_Cell.events**.
+In this step we start with a Wild Type cell. After initializing the class according to the given parameters, we simulate its division up to the selected number of generations. For each cell division we randomly extract the number and types of mutational events occurring in the respective two daughters (during the considered division). The events will be stored in the attribute: **MUT_Cell.events**.
 ##### Example:
-In this example we consider a WT cell with two chromosome, and a simulation of two generations.
+In this example we consider a WT cell with two chromosomes and a two-generation simulation.
 ```python 
 from Simulator import Simulator
 from Utility import Utility
 
 # number of generations to be simulated
 number_of_generations = 2 
-# randomly initialize the chromosome and their sequences
-chromosome_lengths = [int(5e4), int(6e4)] # list containing the lengths of the chromosome
-chromosome_table = Utility.random_seq_initializer(chromosome_lengths)
+
+# randomly initialize the chromosomes and their sequences
+chromosome_lengths = [int(5e4), int(6e4)] # list containing the lengths of the chromosomes
+chromosome_table = Utility.random_seq_initializer(chromosome_lengths) #creates a list containing one tuple (ID, sequence) for each chromosome
+
 # Step 1 (Simulation)
 simul = Simulator(chromosome_table, number_of_generations)
-# access parent node and all the tree
+# access the parent node and all nodes in the tree
 print(simul.parent.data) # WT cell
-print(simul.parent.left) # first generation left doughter
-print(simul.parent.left.right) # and so on...
+print(simul.parent.left) # left daughter of the first generation
+print(simul.parent.left.right) # and so on ...
 ```
 
 #### Step 2 (Reconstruction):
-After **Step 1**, we end up with a binary tree which stores in each node, the events occurred in the corresponding cell between the previous division and the successive one. The aim of **Step 2** is to use the lists of events to reconstruct the actual DNA sequences (in the last generation cells), which are mutated with respect to the Wild Type.
+After **Step 1**, a binary tree is obtained that stores at each node the events that occurred in the corresponding cell between the previous and the next division. The purpose of **Step 2** is to use the event lists to reconstruct the DNA sequences that actually mutated (in the last generation of cells) from the Wild Type.
 
 ##### Example 1 (Complete Reconstruction):
-In this example the last generation is completely reconstructed.
+The following example shows how all cells of the last generation are reconstructed.
 ```python 
 from Simulator import Simulator
 from Utility import Utility
@@ -84,14 +86,15 @@ number_of_generations = 2
 chromosome_lengths = [int(20), int(20)] 
 chromosome_table = Utility.random_seq_initializer(chromosome_lengths)
 simul = Simulator(chromosome_table, number_of_generations)
+
 # Step 2 (Reconstruction)
-simul.reconstructor(simul.parent, number_of_generations, chromosome_table) # reconstruct last generation
+simul.reconstructor(simul.parent, number_of_generations, chromosome_table) # reconstructs last generation
 print(f"CHR1,  WT: {chromosome_table[0][1]}")
 print(f"CHR1, MUT: {simul.parent.left.right.data.DNA.CHRs[0].sequence}")
 ```
 
 ##### Example 2 (Path Reconstruction):
-In this example only the leaf corresponding to the given path has been reconstructed. Notice that in the path: \
+In this example, only the leaf corresponding to the given path was reconstructed. Note that in the path: \
 0 = left doughter \
 1 = right doughter 
 
@@ -104,27 +107,52 @@ number_of_generations = 2
 chromosome_lengths = [int(20), int(20)] 
 chromosome_table = Utility.random_seq_initializer(chromosome_lengths)
 simul = Simulator(chromosome_table, number_of_generations)
+
 # Step 2 (Reconstruction)
 path = [0, 1] # select the path
-leaf = simul.path_reconstructor(path, chromosome_table) #reconstruction of the selected leaf
+leaf = simul.path_reconstructor(path, chromosome_table) #reconstruction of the leaf corresponding to the selected path
 print(f"CHR1,  WT: {chromosome_table[0][1]}")
 print(f"CHR1, leaf: {leaf.data.DNA.CHRs[0].sequence}")
 ```
 
 ### Parameters of the Simulator:
- - **chromosome_table**: list of the chromosomes sequences with the respective chromosome ID. Each element of the list is a tuple;
- - **number_of_generations**: represents the number of generations we want to simulate in **Step 1**;
- - **average_events_number**: average number of events occuring in one cell during the duplication;
- - **cumulative_list**: list containing the values of the cumulative distributions of the kind of event;
- - **n_events_distrib**: probability distribution of the number of events (default Poisson);
- - **del_len_distrib**: probability distribution of the deletion length;
- - **ins_len_distrib**: probability distribution of the insertion length;
- - **transl_len_distrib**: probability distribution of the translocation length;
- - **rec_transl_len_distrib**: probability distribution of the reciprocal translocation length;
- - **dupl_len_distrib**: probability distribution of the duplication length;
+ - **chromosome_table**: List of chromosome sequences with their respective chromosome ID. Each element in the list is a tuple;
+ - **number_of_generations**: represents the number of generations you want to simulate in **Step 1**;
+ - **average_events_number**: average number of events occurring in a cell during duplication;
+ - **cumulative_list**: list containing the values of the cumulative distribution of the event type;
+ - **n_events_distrib**: probability distribution of the number of events (default: Poisson distribution);
+ - **del_len_distrib**: probability distribution of the Deletion length;
+ - **ins_len_distrib**: probability distribution of the Insertion length;
+ - **transl_len_distrib**: probability distribution of the Translocation length;
+ - **rec_transl_len_distrib**: probability distribution of the Reciprocal Translocation length;
+ - **dupl_len_distrib**: probability distribution of the Duplication length;
  
- In case the **chromosome_table** is not given:
+ In case the **chromosome_table** is not given (see "Utility Class"):
  - **chromosome_lengths**: ordered list containing the lengths of the chromosomes considered;
  - **chromosome_number**: total number of chromosomes considered;
 
  ### Utility Class:
+Utility is a class that contains several useful methods: some for testing process RAM usage, others that define probability distributions, and still others that help build a random **chromosome_table** (see "Parameters").
+
+### Methods for RAM usage:
+These methods are useful for calculating RAM usage during simulation. It is important to note that they were written to communicate with macOS zsh and to identify the process ID (pid) of "python3.8". They can be easily adapted for use with another operating system and another version of python.
+
+### Probability Distributions Methods:
+These methods implement probability distributions and can be passed as a parameter to the simulation. The first two (**int_trunc_exp**, **int_trunc_uniform**) use the inverse cumulative method to draw the number of events from truncated distributions, while the last one draws the number of events from a Poisson distribution.
+
+### Methods Chromosome Sequences Initialization
+The role of these methods is to create a random **chromosomal_table** (see Parameters) when it cannot be given from outside.
+
+##### Example:
+Here we first initialize a **chromosome_table** in which each chromosome sequence consists of only the 'A' base; and then we create a random one.
+
+```python
+from Utility import Utility
+
+chromosome_lengths = [int(5e4), int(4e4)] 
+
+# Only 'A' base
+A_chromosome_table = Utility.A_seq_initializer(chromosome_lengths)
+# random sequences
+random_chromosome_table = Utility.random_seq_initializer(chromosome_lengths)
+```
