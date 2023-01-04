@@ -27,9 +27,14 @@ average_events_number = 3
 cumulative_list = [ 1./8,    2./8,     3./8,       4./8,      5./8,    6./8,    7./8,     1.]
 #cumulative_list = [    0,    1./3,        0,          0,         0,    2./3,      0,      1.]
 
+
+
+
 n_events_distrib = Utility.poisson_events_number
 
-del_len_distrib = Utility.int_trunc_exp
+
+tau = 20
+del_len_distrib = Utility.int_trunc_exp_para(tau)
 ins_len_distrib = Utility.int_trunc_exp
 transl_len_distrib = Utility.int_trunc_exp
 rec_transl_len_distrib = Utility.int_trunc_exp

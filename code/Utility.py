@@ -148,6 +148,35 @@ class Utility:
         return rands
 
     @staticmethod
+    def int_trunc_exp_para(tau: float):
+        """
+        It extracts the length of the rearrangement (integer number) from an exponential distribution
+        truncated between "a" and "b", with average value "tau".
+
+        Parameters
+        ----------
+            a (int): left extreme of the distribution domain.
+            b (int): right extreme of the distribution domain.
+            tau (float): average value
+
+        Returns
+        -------
+            rands (int): extracted number.
+
+        Raises
+        ------
+            Exception
+                If 'a' or 'b' are negative.
+        """
+        def internal(a :int, b :int):
+            if a <= 0 or b <= 0: raise Exception(f"a<=0 or b<=0. They must be positive")
+            u = np.random.rand()
+            rands = - tau * np.log(np.exp(-a/tau)*(1 - u) + u * np.exp(-b/tau))
+            return int(rands)
+
+        return internal
+
+    @staticmethod
     def int_trunc_uniform(a :int, b :int):
         """
         It extracts the length of the rearrangement (integer number) from a uniform distribution 

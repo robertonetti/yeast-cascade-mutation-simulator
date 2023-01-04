@@ -148,7 +148,7 @@ class Simulator():
         chr_id = np.random.choice(cell.DNA.IDs)
         ins_pos = np.random.randint(0, cell.DNA.CHRs[chr_id - 1].length) 
         max_ins_length = int((cell.DNA.CHRs[chr_id - 1].length - ins_pos))  
-        ins_length = length_extraction_method(1, max_ins_length) if max_ins_length >= 2 else 1   
+        ins_length = length_extraction_method(1, max_ins_length) if max_ins_length >= 2 else 1  
         Insertion(chr_id, ins_pos, ins_length, cell)
 
     def rand_deletion(self, cell :Cell, length_extraction_method):
