@@ -22,7 +22,7 @@ To run the project, simply download the **code** folder. It contains all the nec
 
 ## 3. Usage:
 
-### 3.1 Data Structure:
+### 3.1. Data Structure:
 The central structure of the simulation consists of a binary tree. Each node in the tree is thought of as a class containing three attributes: **left**, **right** and **data** (see Binary Tree.py). The first and second attributes are actual nodes and represent the two largest nodes of the parent node. The last attribute **node.data**, contains the corresponding cell.
 From the parent node (containing the initial Wild Type cell), all other nodes in the tree can be accessed.
 
@@ -34,7 +34,7 @@ parent = Node() #define the parent node
 parent.left, parent.right = Node(), Node() #define the doughter nodes
 ```
 
-### 3.2 Classes Structure:
+### 3.2. Classes Structure:
 In this section I will very quickly explain the structure of the various classes in the project.
 The fundamental class is **Cell** which has two subclasses **WT_Cell** (Wild Type) and **MUT_Cell** (Mutated Cell). Both subclasses have an attribute called **DNA**, which is a class in turn containing a list of the different **Chromosomes**.
 In addition, only the **MUT_Cell** has as another attribute a list of **Event** representing the mutation events that happened to the respective cell. The **Event** class has two subclasses, the first called **Mutation** is in turn subdivided into: **PointwiseDeletion**, **PointwiseInsertion** and **PointwiseReplacement**. These are mutational events involving a single DNA base.
@@ -45,11 +45,11 @@ The other subclass of **Event** is **Rarrangement**, which is divided into:
 ![Cells](images/Cells.png)
 ![Nodes](images/Nodes.png)
 
-### 3.3 Structure of the Simulator:
+### 3.3. Structure of the Simulator:
 The simulation is divided in two main steps: \
 **Step 1 (Simulation)**: effective simulation of the cell divisions; \
 **Step 2 (Reconstruction)**: reconstruction of the mutated sequences of the last cell generation or the cell at the end of a selected pathway.
-#### 3.3.1 Step 1 (Simulation):
+#### 3.3.1. Step 1 (Simulation):
 In this step we start with a Wild Type cell. After initializing the class according to the given parameters, we simulate its division up to the selected number of generations. For each cell division we randomly extract the number and types of mutational events occurring in the respective two daughters (during the considered division). The events will be stored in the attribute: **MUT_Cell.events**.
 ##### Example:
 In this example we consider a WT cell with two chromosomes and a two-generation simulation.
@@ -72,7 +72,7 @@ print(simul.parent.left) # left daughter of the first generation
 print(simul.parent.left.right) # and so on ...
 ```
 
-#### 3.3.2 Step 2 (Reconstruction):
+#### 3.3.2. Step 2 (Reconstruction):
 After **Step 1**, a binary tree is obtained that stores at each node the events that occurred in the corresponding cell between the previous and the next division. The purpose of **Step 2** is to use the event lists to reconstruct the DNA sequences that actually mutated (in the last generation of cells) from the Wild Type.
 
 ##### Example 1 (Complete Reconstruction):
@@ -115,7 +115,7 @@ print(f"CHR1,  WT: {chromosome_table[0][1]}")
 print(f"CHR1, leaf: {leaf.data.DNA.CHRs[0].sequence}")
 ```
 
-### 3.4 Parameters of the Simulator:
+### 3.4. Parameters of the Simulator:
  - **chromosome_table**: List of chromosome sequences with their respective chromosome ID. Each element in the list is a tuple;
  - **number_of_generations**: represents the number of generations you want to simulate in **Step 1**;
  - **average_events_number**: average number of events occurring in a cell during duplication;
@@ -131,16 +131,16 @@ print(f"CHR1, leaf: {leaf.data.DNA.CHRs[0].sequence}")
  - **chromosome_lengths**: ordered list containing the lengths of the chromosomes considered;
  - **chromosome_number**: total number of chromosomes considered;
 
- ### 3.5 Utility Class:
+ ### 3.5. Utility Class:
 Utility is a class that contains several useful methods: some for testing process RAM usage, others that define probability distributions, and still others that help build a random **chromosome_table** (see "Parameters").
 
-### 3.5.1 Methods for RAM usage:
+### 3.5.1. Methods for RAM usage:
 These methods are useful for calculating RAM usage during simulation. It is important to note that they were written to communicate with macOS zsh and to identify the process ID (pid) of "python3.8". They can be easily adapted for use with another operating system and another version of python.
 
-### 3.5.2 Probability Distributions Methods:
+### 3.5.2. Probability Distributions Methods:
 These methods implement probability distributions and can be passed as a parameter to the simulation. The first two (**int_trunc_exp**, **int_trunc_uniform**) use the inverse cumulative method to draw the number of events from truncated distributions, while the last one draws the number of events from a Poisson distribution.
 
-### 3.5.3 Methods Chromosome Sequences Initialization
+### 3.5.3. Methods Chromosome Sequences Initialization
 The role of these methods is to create a random **chromosomal_table** (see Parameters) when it cannot be given from outside.
 
 ##### Example:
