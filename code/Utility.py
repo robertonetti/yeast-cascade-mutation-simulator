@@ -31,13 +31,15 @@ class Utility:
 
     Probability distributions methods
     ---------------------------------
-    int_trunc_exp(a :int, b :int)
+    int_trunc_exp(a :int, b :int) -> int
         It extracts the length of the rearrangement (integer number) from an exponential 
         distribution truncated between "a" and "b".
-    int_trunc_uniform(a :int, b :int)
+    int_trunc_uniform(tau: float)
         It extracts the length of the rearrangement (integer number) from a uniform distribution 
         truncated between "a" and "b".
-    poisson_events_number(n_ave: int)
+    trunc_exp(a :int, b :int) -> int
+        Receives the parameter 'tau' and then actually draws the rearrangement length.
+    poisson_events_number(n_ave: int) -> int
         It extracts the number of events in one cell duplication (integer number) from the Poisson 
         distribution with average "n_ave".
 
@@ -122,59 +124,43 @@ class Utility:
         return tot_mem, py_mem
 
     @staticmethod
-    def int_trunc_exp(a :int, b :int):
-        """
-        It extracts the length of the rearrangement (integer number) from an exponential distribution
-        truncated between "a" and "b".
-
-        Parameters
-        ----------
-            a (int): left extreme of the distribution domain.
-            b (int): right extreme of the distribution domain.
-
-        Returns
-        -------
-            rands (int): extracted number.
-
-        Raises
-        ------
-            Exception
-                If 'a' or 'b' are negative.
-        """
-        if a <= 0 or b <= 0: raise Exception(f"a<=0 or b<=0. They must be positive")
-        a = -np.log(a)
-        b = -np.log(b)
-        rands = int( np.exp(-(np.random.rand()*(b-a) + a))) 
-        return rands
-
-    @staticmethod
-    def int_trunc_exp_para(tau: float):
+    def int_trunc_exp(tau: float):
         """
         It extracts the length of the rearrangement (integer number) from an exponential distribution
         truncated between "a" and "b", with average value "tau".
 
+        Inner Functions:
+        ---------------
+            trunc_exp(a :int, b :int) -> int
+
         Parameters
         ----------
-            a (int): left extreme of the distribution domain.
-            b (int): right extreme of the distribution domain.
             tau (float): average value
 
         Returns
         -------
-            rands (int): extracted number.
+            trunc_exp (Method): calls the function trunc_exp() that receives the parameter tau.
 
         Raises
         ------
             Exception
                 If 'a' or 'b' are negative.
         """
-        def internal(a :int, b :int):
+        def trunc_exp(a :int, b :int):
+            """
+            Receives the parameter 'tau' and then actually draws the rearrangement length.
+
+            Parameters
+            ----------
+            a (int): left extreme of the distribution domain.
+            b (int): right extreme of the distribution domain.
+
+            """
             if a <= 0 or b <= 0: raise Exception(f"a<=0 or b<=0. They must be positive")
             u = np.random.rand()
             rands = - tau * np.log(np.exp(-a/tau)*(1 - u) + u * np.exp(-b/tau))
             return int(rands)
-
-        return internal
+        return trunc_exp
 
     @staticmethod
     def int_trunc_uniform(a :int, b :int):

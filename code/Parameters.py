@@ -25,28 +25,21 @@ average_events_number = 3
 
 #                  Delet.   Insert.   Transl.   Rec.Transl.   Dupl.   P.Ins.   P.Del.   P.Repl
 cumulative_list = [ 1./8,    2./8,     3./8,       4./8,      5./8,    6./8,    7./8,     1.]
-#cumulative_list = [    0,    1./3,        0,          0,         0,    2./3,      0,      1.]
-
-
 
 
 n_events_distrib = Utility.poisson_events_number
 
-
-tau = 20
-del_len_distrib = Utility.int_trunc_exp_para(tau)
-ins_len_distrib = Utility.int_trunc_exp
-transl_len_distrib = Utility.int_trunc_exp
-rec_transl_len_distrib = Utility.int_trunc_exp
-dupl_len_distrib = Utility.int_trunc_exp
+tau = 20 # parameter of the exponential distribution
+del_len_distrib = Utility.int_trunc_exp(tau)
+ins_len_distrib = Utility.int_trunc_exp(tau)
+transl_len_distrib = Utility.int_trunc_exp(tau)
+rec_transl_len_distrib = Utility.int_trunc_exp(tau)
+dupl_len_distrib = Utility.int_trunc_exp(tau)
 
 chromosome_lengths = [int(5e5), int(5e5), int(5e5), int(5e5), int(5e5),int(5e5), int(5e5), int(5e5),
                     int(5e5), int(5e5),int(5e5), int(5e5), int(5e5), int(5e5), int(5e5), int(5e5),
                     int(5e5), int(5e5)]         
-#chromosome_lengths = [int(100), int(100), int(100), int(100), int(100), int(100), int(100), int(100),
-                    #  int(100), int(100), int(100), int(100), int(100), int(100), int(100), int(100),
-                    #  int(100), int(100), int(100), int(100), int(100), int(100), int(100), int(100)]
                     
 chromosome_number = 16 
-#chromosome_table = Utility.A_seq_initializer(chromosome_lengths)
+
 chromosome_table = Utility.random_seq_initializer(chromosome_lengths)
