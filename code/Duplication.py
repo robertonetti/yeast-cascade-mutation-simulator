@@ -1,5 +1,7 @@
 from code.Rearrangement import Rearrangement
 from code.BinaryTree import Node
+from scipy.sparse import *
+import numpy as np
 
 class Duplication(Rearrangement):
     """
@@ -24,6 +26,25 @@ class Duplication(Rearrangement):
         Reconstruction of the DNA sequence involved in the current Duplication, of the considered
         cell.
     """
+
+    def update_visual(self, chr):
+        new_vis = chr.visual.todense().tolist()[0]
+        duplicated = np.array(new_vis[self.InitPos : self.InitPos + self.Length]) + 1
+        duplicated = duplicated.tolist()
+        new_vis = new_vis[: self.FinalPos] + duplicated + new_vis[self.FinalPos :]
+        if len(new_vis) != chr.length: raise Exception(f"visual {len(new_vis)}, chr {chr.length}")
+
+        if self.InitPos - 1 >= 0: 
+            print(f"InitPos: {self.InitPos}, len(new_vis): {len(new_vis)}")
+            new_vis[self.InitPos - 1] += 1
+        if self.InitPos  < len(new_vis): new_vis[self.InitPos] += 1
+        chr.visual = lil_matrix(new_vis)
+
+
+
+
+
+
     def reconstruct(self, node: Node):
         """
         Reconstruction of the DNA sequence involved in the current Duplication, in the considered
@@ -60,6 +81,7 @@ class Duplication(Rearrangement):
         if cell != None:
             cell.events.append(self)
             cell.DNA.CHRs[ChrID - 1].length += self.Length
+            self.update_visual(cell.DNA.CHRs[ChrID - 1])
 
     def __repr__(self):
         return f"Event->{self.kind}->{self.SubKind}(ChrId: {self.ChrID!r}, InitPos: {self.InitPos!r}, Length: {self.Length!r}, FinalPos: {self.FinalPos!r})"
