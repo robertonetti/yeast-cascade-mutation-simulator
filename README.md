@@ -11,6 +11,7 @@ The further goal of the project is to build an algorithm that can reconstruct th
 1. Requirements;
 2. Installation;
 4. Usage;
+5. Roadmap.
 
 ## 1. Requirements:
 This project requires the following libraries:
@@ -143,7 +144,7 @@ These methods are useful for calculating RAM usage during simulation. It is impo
 ### 3.5.2. Probability Distributions Methods:
 These methods implement probability distributions and can be passed as a parameter to the simulation. The first two (**int_trunc_exp**, **int_trunc_uniform**) use the inverse cumulative method to draw the number of events from truncated distributions, while the last one draws the number of events from a Poisson distribution.
 
-### 3.5.3. Methods Chromosome Sequences Initialization
+### 3.5.3. Methods for Chromosome Sequences Initialization:
 The role of these methods is to create a random **chromosomal_table** (see Parameters) when it cannot be given from outside.
 
 ##### Example:
@@ -159,3 +160,12 @@ A_chromosome_table = Utility.A_seq_initializer(chromosome_lengths)
 # random sequences
 random_chromosome_table = Utility.random_seq_initializer(chromosome_lengths)
 ```
+
+## Roadmap:
+- [x] documentation;
+- [x] github repository;
+- [x] RAM usage test;
+- [x] elapsed time test;
+- [ ] data and results representation;
+- [ ] test of the regimes for different parameters;
+- [ ] application to real yeast cells.
