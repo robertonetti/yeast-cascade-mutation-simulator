@@ -20,12 +20,13 @@ chromosome_lengths (list): list of contaning in order, the length of each chromo
 chromosome_number (int): number of chromosomes.
 chromosome_table (list): list of tuple. Each tuple contains the chromosome ID and its sequence.
 """
-number_of_generations = 10
-average_events_number = 5
+number_of_generations = 5
+average_events_number = 10
 
 #                  Delet.   Insert.   Transl.   Rec.Transl.   Dupl.   P.Ins.   P.Del.   P.Repl
 cumulative_list = [ 1./8,    2./8,     3./8,       4./8,      5./8,    6./8,    7./8,     1.]
 
+cumulative_list = [ 1.,       0,         0,          0,         0,       0,       0,       0]
 
 n_events_distrib = Utility.poisson_events_number
 
@@ -37,8 +38,7 @@ rec_transl_len_distrib = Utility.int_trunc_uniform #Utility.int_trunc_exp(tau)
 dupl_len_distrib = Utility.int_trunc_uniform #Utility.int_trunc_exp(tau)
 
 chromosome_lengths = [int(5e5), int(5e5), int(5e5), int(5e5), int(5e5),int(5e5), int(5e5), int(5e5),
-                    int(5e5), int(5e5),int(5e5), int(5e5), int(5e5), int(5e5), int(5e5), int(5e5),
-                    int(5e5), int(5e5)]         
+                    int(5e5), int(5e5),int(5e5), int(5e5), int(5e5), int(5e5), int(5e5), int(5e5)]         
                     
 chromosome_number = 16 
 

@@ -1,5 +1,7 @@
 from code.Rearrangement import Rearrangement
 from code.BinaryTree import Node
+from scipy.sparse import *
+
 
 class Deletion(Rearrangement):
     """
@@ -22,6 +24,15 @@ class Deletion(Rearrangement):
         Reconstruction of the DNA sequence involved in the current Deletion, of the considered
         cell.
     """
+    def update_visual(self, chr):
+        new_vis = chr.visual.todense().tolist()[0]
+        new_vis = new_vis[: self.Pos] + new_vis[self.Pos + self.Length :]
+        if self.Pos - 1 >= 0: 
+            #print(f"Pos: {self.Pos}, len(new_vis): {len(new_vis)}")
+            new_vis[self.Pos - 1] += 1
+        if self.Pos  < len(new_vis): new_vis[self.Pos] += 1
+        chr.visual = lil_matrix(new_vis)
+
     def reconstruct(self, node: Node):
         """
         Reconstruction of the DNA sequence involved in the current Deletion, in the considered
@@ -53,6 +64,7 @@ class Deletion(Rearrangement):
         if cell != None:
             cell.events.append(self)
             cell.DNA.CHRs[ChrID - 1].length -= self.Length
+            self.update_visual(cell.DNA.CHRs[ChrID - 1])
             if cell.DNA.CHRs[ChrID - 1].length == 0:
                 cell.DNA.IDs.remove(ChrID)
                 print(f"(generation: {cell.generation}) Chromosome {ChrID} has been removed! \n The event was a {self}.\n")
