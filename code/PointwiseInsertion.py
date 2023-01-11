@@ -21,6 +21,24 @@ class PointInsertion(Mutation):
         Reconstruction of the DNA sequence involved in the current PointwiseInsertion, of the 
         considered cell.
     """
+
+
+    def update_visual(self, chr):
+        inserted = np.array([1])
+        new_vis = np.concatenate((chr.visual[: self.Pos], inserted, chr.visual[self.Pos :]))
+        if len(new_vis) != chr.length: raise Exception(f"P.Insertion: visual {len(new_vis)}, chr {chr.length}")
+        
+        chr.visual = new_vis
+
+
+
+
+
+
+
+
+
+
     def reconstruct(self, node: Node):
         """
         Reconstruction of the DNA sequence involved in the current PointwiseInsertion, in the 
@@ -51,6 +69,7 @@ class PointInsertion(Mutation):
         if cell != None:
             cell.events.append(self)
             cell.DNA.CHRs[ChrID - 1].length += 1
+            self.update_visual(cell.DNA.CHRs[ChrID - 1])
 
     
     def __repr__(self):

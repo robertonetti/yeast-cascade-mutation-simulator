@@ -1,5 +1,6 @@
 from code.Mutation import Mutation
 from code.BinaryTree import Node
+import numpy as np
 
 class PointDeletion(Mutation):
     """
@@ -20,6 +21,21 @@ class PointDeletion(Mutation):
         Reconstruction of the DNA sequence involved in the current PointwiseDeletion, of the 
         considered cell.
     """
+
+    def update_visual(self, chr):
+        new_vis = np.concatenate((chr.visual[: self.Pos], chr.visual[self.Pos + 1 :]))
+        if len(new_vis) != chr.length: raise Exception(f"visual {len(new_vis)}, chr {chr.length}")
+        if self.Pos - 1 >= 0: 
+            new_vis[self.Pos - 1] += 1
+        if self.Pos  < len(new_vis): new_vis[self.Pos] += 1
+        chr.visual = new_vis
+
+
+
+
+
+
+
     def reconstruct(self, node: Node):
         """
         Reconstruction of the DNA sequence involved in the current PointwiseDeletion, in the 
@@ -51,6 +67,7 @@ class PointDeletion(Mutation):
         if cell != None:
             cell.events.append(self)
             cell.DNA.CHRs[ChrID - 1].length -= 1
+            self.update_visual(cell.DNA.CHRs[ChrID - 1])
             if cell.DNA.CHRs[ChrID - 1].length == 0:
                 cell.DNA.IDs.remove(ChrID)
                 print(f"(generation: {cell.generation}) Chromosome {ChrID} has been removed! \n The event was a {self}.\n")

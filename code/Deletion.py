@@ -28,7 +28,6 @@ class Deletion(Rearrangement):
         new_vis = np.concatenate((chr.visual[: self.Pos], chr.visual[self.Pos + self.Length :]))
         if len(new_vis) != chr.length: raise Exception(f"visual {len(new_vis)}, chr {chr.length}")
         if self.Pos - 1 >= 0: 
-            #print(f"Pos: {self.Pos}, len(new_vis): {len(new_vis)}")
             new_vis[self.Pos - 1] += 1
         if self.Pos  < len(new_vis): new_vis[self.Pos] += 1
         chr.visual = new_vis

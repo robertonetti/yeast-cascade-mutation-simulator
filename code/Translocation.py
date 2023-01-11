@@ -1,6 +1,7 @@
 
 from code.Rearrangement import Rearrangement
 from code.BinaryTree import Node
+import numpy as np 
 
 class Translocation(Rearrangement):
     """
@@ -25,6 +26,33 @@ class Translocation(Rearrangement):
         Reconstruction of the DNA sequence involved in the current Translocation, of the considered
         cell.
     """
+
+    def update_visual(self, chr):
+        translocated = chr.visual[self.InitPos : self.InitPos + self.Length] + 1
+        new_vis = np.concatenate((chr.visual[: self.InitPos], chr.visual[self.InitPos + self.Length :]))
+        new_vis = np.concatenate((new_vis[: self.FinalPos], translocated, new_vis[self.FinalPos :]))
+        if len(new_vis) != chr.length: raise Exception(f"visual {len(new_vis)}, chr {chr.length}")
+        if self.InitPos - 1 >= 0: new_vis[self.InitPos - 1] += 1
+        if self.InitPos  < len(new_vis): new_vis[self.InitPos] += 1
+        chr.visual = new_vis
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     def reconstruct(self, node: Node):
         """
         Reconstruction of the DNA sequence involved in the current Translocation, in the considered
@@ -59,6 +87,7 @@ class Translocation(Rearrangement):
         self.FinalPos = FinalPos
         if cell != None:
             cell.events.append(self)
+            self.update_visual(cell.DNA.CHRs[ChrID - 1])
     
     def __repr__(self):
         return f"Event->{self.kind}->{self.SubKind}(ChrId: {self.ChrID!r}, InitPos: {self.InitPos!r}, Length: {self.Length!r}, FinalPos: {self.FinalPos!r})"

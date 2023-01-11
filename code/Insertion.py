@@ -23,6 +23,21 @@ class Insertion(Rearrangement):
         Reconstruction of the DNA sequence involved in the current Insertion, of the considered
         cell.
     """
+
+    def update_visual(self, chr):
+        inserted = np.array(self.Length) +1
+        new_vis = np.concatenate((chr.visual[: self.Pos], inserted, chr.visual[self.Pos :]))
+        if len(new_vis) != chr.length: raise Exception(f"visual {len(new_vis)}, chr {chr.length}")
+        
+        chr.visual = new_vis
+
+
+
+
+
+
+
+
     def reconstruct(self, node: Node):
         """
         Reconstruction of the DNA sequence involved in the current Insertion, in the considered
@@ -56,6 +71,7 @@ class Insertion(Rearrangement):
         if cell != None:
             cell.events.append(self)
             cell.DNA.CHRs[ChrID - 1].length += self.Length
+            self.update_visual(cell.DNA.CHRs[ChrID - 1])
     
     def __repr__(self):
         return f"Event->{self.kind}->{self.SubKind}(ChrId: {self.ChrID!r}, Pos: {self.Pos!r}, Length: {self.Length!r})"

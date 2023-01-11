@@ -1,5 +1,6 @@
 from code.Rearrangement import Rearrangement
 from code.BinaryTree import Node
+import numpy as np
 
 class ReciprocalTranslocation(Rearrangement):
     """
@@ -27,6 +28,29 @@ class ReciprocalTranslocation(Rearrangement):
         Reconstruction of the DNA sequence involved in the current ReciprocalTranslocation, of the 
         considered cell.
     """
+
+
+
+
+
+    def update_visual(self, chrs: tuple):
+        translocated = chrs[0].visual[self.InitPos : self.InitPos + self.Length] + 1
+        new_vis_1 = np.concatenate((chrs[0].visual[: self.InitPos], chrs[0].visual[self.InitPos + self.Length :]))
+        new_vis_2 = np.concatenate((chrs[1].visual[: self.FinalPos], translocated, chrs[1].visual[self.FinalPos :]))
+        if len(new_vis_1) != chrs[0].length: raise Exception(f"chr 1: visual={len(new_vis_1)}, chr_len={chrs[0].length}")
+        if self.InitPos - 1 >= 0: new_vis_1[self.InitPos - 1] += 1
+        if self.InitPos  < len(new_vis_1): new_vis_1[self.InitPos] += 1
+        if len(new_vis_2) != chrs[1].length: raise Exception(f"chr 2: visual={len(new_vis_2)}, chr_len={chrs[0].length}")
+        chrs[0].visual, chrs[1].visual = new_vis_1, new_vis_2
+
+
+
+
+
+
+
+
+
     def reconstruct(self, node: Node):
         """
         Reconstruction of the DNA sequence involved in the current ReciprocalTranslocation, in the 
@@ -69,6 +93,8 @@ class ReciprocalTranslocation(Rearrangement):
             cell.events.append(self)
             cell.DNA.CHRs[ChrIDs[0] - 1].length -= self.Length
             cell.DNA.CHRs[ChrIDs[1] - 1].length += self.Length
+            chrs = (cell.DNA.CHRs[ChrIDs[0] - 1], cell.DNA.CHRs[ChrIDs[1] - 1])
+            self.update_visual(chrs)
             if cell.DNA.CHRs[ChrIDs[0] - 1].length == 0:
                 cell.DNA.IDs.remove(ChrIDs[0])
                 print(f"(generation: {cell.generation}) Chromosome {ChrIDs[0]} has been removed! The events was a {self}.")
