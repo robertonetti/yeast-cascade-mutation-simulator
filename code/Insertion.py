@@ -25,7 +25,7 @@ class Insertion(Rearrangement):
     """
 
     def update_visual(self, chr):
-        inserted = np.array(self.Length) +1
+        inserted = np.zeros(self.Length)
         new_vis = np.concatenate((chr.visual[: self.Pos], inserted, chr.visual[self.Pos :]))
         if len(new_vis) != chr.length: raise Exception(f"visual {len(new_vis)}, chr {chr.length}")
         

@@ -19,6 +19,15 @@ class PointReplacement(Mutation):
         Reconstruction of the DNA sequence involved in the current PointwiseReplacement, of the 
         considered cell.
     """
+
+
+    def update_visual(self, chr):
+        chr.visual[self.Pos] += 1
+
+
+
+
+
     def reconstruct(self, node: Node):
         """
         Reconstruction of the DNA sequence involved in the current PointwiseReplacement, in the 
@@ -52,6 +61,7 @@ class PointReplacement(Mutation):
         self.Pos = Pos
         if cell != None:
             cell.events.append(self)
+            self.update_visual(cell.DNA.CHRs[ChrID - 1])
 
     def __repr__(self):
         return f"Event->{self.kind}->{self.SubKind}(ChrId: {self.ChrID!r}, Pos: {self.Pos!r})"

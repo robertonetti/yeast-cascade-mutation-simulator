@@ -24,8 +24,7 @@ class PointInsertion(Mutation):
 
 
     def update_visual(self, chr):
-        inserted = np.array([1])
-        new_vis = np.concatenate((chr.visual[: self.Pos], inserted, chr.visual[self.Pos :]))
+        new_vis = np.concatenate((chr.visual[: self.Pos], np.array([1]), chr.visual[self.Pos :]))
         if len(new_vis) != chr.length: raise Exception(f"P.Insertion: visual {len(new_vis)}, chr {chr.length}")
         
         chr.visual = new_vis
