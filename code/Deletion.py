@@ -1,6 +1,6 @@
 from code.Rearrangement import Rearrangement
 from code.BinaryTree import Node
-from scipy.sparse import *
+import numpy as np
 
 
 class Deletion(Rearrangement):
@@ -25,15 +25,13 @@ class Deletion(Rearrangement):
         cell.
     """
     def update_visual(self, chr):
-        
-        new_vis = chr.visual.todense().tolist()[0]
-        new_vis = new_vis[: self.Pos] + new_vis[self.Pos + self.Length :]
+        new_vis = np.concatenate((chr.visual[: self.Pos], chr.visual[self.Pos + self.Length :]))
         if len(new_vis) != chr.length: raise Exception(f"visual {len(new_vis)}, chr {chr.length}")
         if self.Pos - 1 >= 0: 
-            print(f"Pos: {self.Pos}, len(new_vis): {len(new_vis)}")
+            #print(f"Pos: {self.Pos}, len(new_vis): {len(new_vis)}")
             new_vis[self.Pos - 1] += 1
         if self.Pos  < len(new_vis): new_vis[self.Pos] += 1
-        chr.visual = lil_matrix(new_vis)
+        chr.visual = new_vis
 
     def reconstruct(self, node: Node):
         """

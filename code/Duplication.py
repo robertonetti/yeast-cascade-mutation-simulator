@@ -28,17 +28,10 @@ class Duplication(Rearrangement):
     """
 
     def update_visual(self, chr):
-        new_vis = chr.visual.todense().tolist()[0]
-        duplicated = np.array(new_vis[self.InitPos : self.InitPos + self.Length]) + 1
-        duplicated = duplicated.tolist()
-        new_vis = new_vis[: self.FinalPos] + duplicated + new_vis[self.FinalPos :]
+        duplicated = chr.visual[self.InitPos : self.InitPos + self.Length] + 1
+        new_vis = np.concatenate((chr.visual[: self.FinalPos], duplicated, chr.visual[self.FinalPos :]))
         if len(new_vis) != chr.length: raise Exception(f"visual {len(new_vis)}, chr {chr.length}")
-
-        if self.InitPos - 1 >= 0: 
-            print(f"InitPos: {self.InitPos}, len(new_vis): {len(new_vis)}")
-            new_vis[self.InitPos - 1] += 1
-        if self.InitPos  < len(new_vis): new_vis[self.InitPos] += 1
-        chr.visual = lil_matrix(new_vis)
+        chr.visual = new_vis
 
 
 

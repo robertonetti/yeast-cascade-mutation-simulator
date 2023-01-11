@@ -1,4 +1,4 @@
-from scipy.sparse import *
+import numpy as np
 
 class Chromosome:
     """
@@ -31,7 +31,7 @@ class Chromosome:
         if ID <= 0 : raise Exception(f"ID cannot be smaller than 0!")
         self.ID = ID
         self.length = length
-        self.visual = lil_matrix((1, length))
+        self.visual = np.zeros(length)
     sequence = None
 
     def __repr__(self):
