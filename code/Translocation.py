@@ -67,7 +67,7 @@ class Translocation(Rearrangement):
         node.data.DNA.CHRs[chrID - 1].sequence = node.data.DNA.CHRs[chrID - 1].sequence[ : init_pos] +  node.data.DNA.CHRs[chrID - 1].sequence[end_pos : ]
         node.data.DNA.CHRs[chrID - 1].sequence = node.data.DNA.CHRs[chrID - 1].sequence[ : final_pos] + transl_seq + node.data.DNA.CHRs[chrID - 1].sequence[final_pos : ]
 
-    def __init__(self, ChrID :int, InitPos :int, Length :int, FinalPos :int, cell = None):
+    def __init__(self, ChrID :int, InitPos :int, Length :int, FinalPos :int, cell = None, visual = False):
         """
         Defines the SubKind, and initializes ChrID, InitPos, Length, FinalPos according to the given
         parameters.
@@ -87,7 +87,7 @@ class Translocation(Rearrangement):
         self.FinalPos = FinalPos
         if cell != None:
             cell.events.append(self)
-            self.update_visual(cell.DNA.CHRs[ChrID - 1])
+            if visual == True : self.update_visual(cell.DNA.CHRs[ChrID - 1])
     
     def __repr__(self):
         return f"Event->{self.kind}->{self.SubKind}(ChrId: {self.ChrID!r}, InitPos: {self.InitPos!r}, Length: {self.Length!r}, FinalPos: {self.FinalPos!r})"

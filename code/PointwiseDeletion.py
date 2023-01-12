@@ -50,7 +50,7 @@ class PointDeletion(Mutation):
         node.data.DNA.CHRs[chrID - 1].sequence = node.data.DNA.CHRs[chrID - 1].sequence[ : del_pos]\
              +  node.data.DNA.CHRs[chrID - 1].sequence[del_pos + 1 : ]
     
-    def __init__(self, ChrID :int, Pos :int, cell = None):
+    def __init__(self, ChrID :int, Pos :int, cell = None, visual = False):
         """
         It defines the 'SubKind', and initializes 'ChrID' and 'Pos' according to the given 
         parameters.
@@ -67,7 +67,7 @@ class PointDeletion(Mutation):
         if cell != None:
             cell.events.append(self)
             cell.DNA.CHRs[ChrID - 1].length -= 1
-            self.update_visual(cell.DNA.CHRs[ChrID - 1])
+            if visual == True : self.update_visual(cell.DNA.CHRs[ChrID - 1])
             if cell.DNA.CHRs[ChrID - 1].length == 0:
                 cell.DNA.IDs.remove(ChrID)
                 print(f"(generation: {cell.generation}) Chromosome {ChrID} has been removed! \n The event was a {self}.\n")

@@ -68,7 +68,7 @@ class ReciprocalTranslocation(Rearrangement):
         node.data.DNA.CHRs[chrIDs[1] - 1].sequence = node.data.DNA.CHRs[chrIDs[1] - 1].sequence[ : final_pos] \
             + transl_seq + node.data.DNA.CHRs[chrIDs[1] - 1].sequence[final_pos : ]
 
-    def __init__(self, ChrIDs :tuple, InitPos :int, Length :int, FinalPos :int, cell = None):
+    def __init__(self, ChrIDs :tuple, InitPos :int, Length :int, FinalPos :int, cell = None, visual = False):
         """
         It defines the 'SubKind', and initializes 'ChrID', 'InitPos', 'Length', 'FinalPos' according
         to the given parameters.
@@ -94,7 +94,7 @@ class ReciprocalTranslocation(Rearrangement):
             cell.DNA.CHRs[ChrIDs[0] - 1].length -= self.Length
             cell.DNA.CHRs[ChrIDs[1] - 1].length += self.Length
             chrs = (cell.DNA.CHRs[ChrIDs[0] - 1], cell.DNA.CHRs[ChrIDs[1] - 1])
-            self.update_visual(chrs)
+            if visual == True : self.update_visual(chrs)
             if cell.DNA.CHRs[ChrIDs[0] - 1].length == 0:
                 cell.DNA.IDs.remove(ChrIDs[0])
                 print(f"(generation: {cell.generation}) Chromosome {ChrIDs[0]} has been removed! The events was a {self}.")

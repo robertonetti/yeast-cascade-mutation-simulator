@@ -45,7 +45,7 @@ class PointReplacement(Mutation):
         new_base = np.random.choice(bases)
         node.data.DNA.CHRs[chrID - 1].sequence = node.data.DNA.CHRs[chrID - 1].sequence[ : repl_pos] + new_base + node.data.DNA.CHRs[chrID - 1].sequence[repl_pos + 1 : ]
     
-    def __init__(self, ChrID :int, Pos :int, cell = None):
+    def __init__(self, ChrID :int, Pos :int, cell = None, visual = False):
         """
         It defines the 'SubKind', and initializes 'ChrID' and 'Pos' according to the given 
         parameters.
@@ -61,7 +61,7 @@ class PointReplacement(Mutation):
         self.Pos = Pos
         if cell != None:
             cell.events.append(self)
-            self.update_visual(cell.DNA.CHRs[ChrID - 1])
+            if visual == True : self.update_visual(cell.DNA.CHRs[ChrID - 1])
 
     def __repr__(self):
         return f"Event->{self.kind}->{self.SubKind}(ChrId: {self.ChrID!r}, Pos: {self.Pos!r})"

@@ -52,7 +52,7 @@ class PointInsertion(Mutation):
         ins_base = np.random.choice(["A","G","C","T"])
         node.data.DNA.CHRs[chrID - 1].sequence = node.data.DNA.CHRs[chrID - 1].sequence[ : ins_pos] + ins_base + node.data.DNA.CHRs[chrID - 1].sequence[ins_pos : ]
 
-    def __init__(self, ChrID :int, Pos :int, cell = None):
+    def __init__(self, ChrID :int, Pos :int, cell = None, visual = False):
         """
         Defines the 'SubKind', and initializes 'ChrID' and 'Pos' according to the given parameters.
 
@@ -68,7 +68,7 @@ class PointInsertion(Mutation):
         if cell != None:
             cell.events.append(self)
             cell.DNA.CHRs[ChrID - 1].length += 1
-            self.update_visual(cell.DNA.CHRs[ChrID - 1])
+            if visual == True : self.update_visual(cell.DNA.CHRs[ChrID - 1])
 
     
     def __repr__(self):

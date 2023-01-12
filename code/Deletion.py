@@ -44,7 +44,7 @@ class Deletion(Rearrangement):
         chrID, init_pos, final_pos = self.ChrID, self.Pos, self.Pos + self.Length
         node.data.DNA.CHRs[chrID - 1].sequence = node.data.DNA.CHRs[chrID - 1].sequence[ : init_pos] +  node.data.DNA.CHRs[chrID - 1].sequence[final_pos : ]
     
-    def __init__(self, ChrID :int, Pos :int, Length :int, cell = None):
+    def __init__(self, ChrID :int, Pos :int, Length :int, cell = None, visual = False):
         """
         Defines the 'SubKind', and initializes 'ChrID', 'Pos' and 'Length' according to the given
         parameters.
@@ -63,7 +63,7 @@ class Deletion(Rearrangement):
         if cell != None:
             cell.events.append(self)
             cell.DNA.CHRs[ChrID - 1].length -= self.Length
-            self.update_visual(cell.DNA.CHRs[ChrID - 1])
+            if visual == True : self.update_visual(cell.DNA.CHRs[ChrID - 1])
             if cell.DNA.CHRs[ChrID - 1].length == 0:
                 cell.DNA.IDs.remove(ChrID)
                 print(f"(generation: {cell.generation}) Chromosome {ChrID} has been removed! \n The event was a {self}.\n")

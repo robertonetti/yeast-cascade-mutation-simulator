@@ -34,6 +34,7 @@ class Node():
         n_seqs = len(parent.data.DNA.CHRs)
         for i in range(n_seqs):
             self.data.DNA.CHRs[i].sequence = copy.deepcopy(parent.data.DNA.CHRs[i].sequence)
+            self.data.DNA.CHRs[i].visual = copy.deepcopy(parent.data.DNA.CHRs[i].visual)
 
     def __init__(self, data = None, generation = 0):
         """

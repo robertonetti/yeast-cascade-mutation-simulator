@@ -52,7 +52,7 @@ class Insertion(Rearrangement):
         node.data.DNA.CHRs[chrID - 1].sequence = node.data.DNA.CHRs[chrID - 1].sequence[ : init_pos] \
                                  + new_seq + node.data.DNA.CHRs[chrID - 1].sequence[init_pos : ]
 
-    def __init__(self, ChrID :int, Pos :int, Length :int, cell = None):
+    def __init__(self, ChrID :int, Pos :int, Length :int, cell = None, visual = False):
         """
         It defines the 'SubKind', and initializes 'ChrID', 'Pos' and 'Length' according to the given
         parameters.
@@ -71,7 +71,7 @@ class Insertion(Rearrangement):
         if cell != None:
             cell.events.append(self)
             cell.DNA.CHRs[ChrID - 1].length += self.Length
-            self.update_visual(cell.DNA.CHRs[ChrID - 1])
+            if visual == True : self.update_visual(cell.DNA.CHRs[ChrID - 1])
     
     def __repr__(self):
         return f"Event->{self.kind}->{self.SubKind}(ChrId: {self.ChrID!r}, Pos: {self.Pos!r}, Length: {self.Length!r})"
