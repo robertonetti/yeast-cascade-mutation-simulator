@@ -122,6 +122,12 @@ class Simulator():
         It updates the length of each chromosome in order to comute the average.
     chromosome_std_dev(self, n_chr: int, n_gen: int)
         It computes the Standard Deviation of the final length of each Chromosome.
+
+    Methods for result visualization
+    --------------------------------
+    chromosome_visualizator(self, leaf_number: int):
+        Displays the chromosome of a selected leaf, highlighting locations where multiple 
+        Rearrangements/Mutations have occurred.
     """
     def leaves_collector(self, cell: Cell):
         """

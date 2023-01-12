@@ -20,7 +20,7 @@ chromosome_lengths (list): list of contaning in order, the length of each chromo
 chromosome_number (int): number of chromosomes.
 chromosome_table (list): list of tuple. Each tuple contains the chromosome ID and its sequence.
 """
-number_of_generations = 10
+number_of_generations = 4
 average_events_number = 5
 
 #                  Delet.   Insert.   Transl.   Rec.Transl.   Dupl.   P.Ins.   P.Del.   P.Repl
