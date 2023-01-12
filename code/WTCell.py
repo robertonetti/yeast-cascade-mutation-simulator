@@ -29,6 +29,8 @@ class WT_Cell(Cell):
                                      sequence.
             generation (int):
                 Generation which the cell belongs to. (default: 0)
+            visual (bool):
+                True if the visualizaiton is active. False if not.
         """
         self.kind = "Wild Type"
         self.generation = generation

@@ -17,24 +17,27 @@ class PointDeletion(Mutation):
 
     Methods
     -------
+    update_visual(self, chr: Chromosome):
+        Updates the "visual" array of the chromosome.
     reconstruct(self, node: Node):
         Reconstruction of the DNA sequence involved in the current PointwiseDeletion, of the 
         considered cell.
     """
 
     def update_visual(self, chr):
+        """
+        Updates the "visual" array of the chromosome.
+
+        Parameters
+        ----------
+            chr (Chromosome): chromosome involeved in the Deletion.
+        """
         new_vis = np.concatenate((chr.visual[: self.Pos], chr.visual[self.Pos + 1 :]))
         if len(new_vis) != chr.length: raise Exception(f"visual {len(new_vis)}, chr {chr.length}")
         if self.Pos - 1 >= 0: 
             new_vis[self.Pos - 1] += 1
         if self.Pos  < len(new_vis): new_vis[self.Pos] += 1
         chr.visual = new_vis
-
-
-
-
-
-
 
     def reconstruct(self, node: Node):
         """
@@ -53,12 +56,14 @@ class PointDeletion(Mutation):
     def __init__(self, ChrID :int, Pos :int, cell = None, visual = False):
         """
         It defines the 'SubKind', and initializes 'ChrID' and 'Pos' according to the given 
-        parameters.
+        parameters.In the end updates the 'visual' array and cheks if the chromosome is deleted.
 
         Parameters
         ----------
             ChrID (int): ID of the chromosome involved.
             Pos (int): position of the deleted DNA base.
+            cell (Cell): Cell involved in the PointwiseDeletion.
+            visual (bool): True if the visualizaiton is active. False if not.
         """
         super().__init__()
         self.SubKind = "Pointwise Deletion"

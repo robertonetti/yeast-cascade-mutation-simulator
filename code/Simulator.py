@@ -145,6 +145,7 @@ class Simulator():
             cell (Cell): considered cell.
             length_extraction_method (Method): probability distribution for the extraction of the 
                                                rearrangement length.
+            visual (bool): True if the visualizaiton is active. False if not.
         """
         chr_id = np.random.choice(cell.DNA.IDs)
         ins_pos = np.random.randint(0, cell.DNA.CHRs[chr_id - 1].length) 
@@ -162,6 +163,7 @@ class Simulator():
             cell (Cell): considered cell.
             length_extraction_method (Method): probability distribution for the extraction of the 
                                                rearrangement length.
+            visual (bool): True if the visualizaiton is active. False if not.
         """
         chr_id = np.random.choice(cell.DNA.IDs)
 
@@ -187,6 +189,7 @@ class Simulator():
             cell (Cell): considered cell.
             length_extraction_method (Method): probability distribution for the extraction of the 
                                                rearrangement length.
+            visual (bool): True if the visualizaiton is active. False if not.
         """ 
         chr_id = np.random.choice(cell.DNA.IDs)
         if cell.DNA.CHRs[chr_id - 1].length == 1: 
@@ -209,6 +212,7 @@ class Simulator():
             cell (Cell): considered cell.
             length_extraction_method (Method): probability distribution for the extraction of the 
                                                rearrangement length.
+            visual (bool): True if the visualizaiton is active. False if not.
         """
         chr_id1 = np.random.choice(cell.DNA.IDs)
         possible_chrs = list(copy.deepcopy(cell.DNA.IDs))
@@ -231,6 +235,7 @@ class Simulator():
             cell (Cell): considered cell.
             length_extraction_method (Method): probability distribution for the extraction of the 
                                                rearrangement length.
+            visual (bool): True if the visualizaiton is active. False if not.
         """
         chr_id = np.random.choice(cell.DNA.IDs)
         init_pos = np.random.randint(0, cell.DNA.CHRs[chr_id - 1].length) 
@@ -249,6 +254,7 @@ class Simulator():
         Parameters
         ----------
             cell (Cell): considered cell.
+            visual (bool): True if the visualizaiton is active. False if not.
         """
         chr_id = np.random.choice(cell.DNA.IDs)
         ins_pos = np.random.randint(0, cell.DNA.CHRs[chr_id - 1].length)  
@@ -262,6 +268,7 @@ class Simulator():
         Parameters
         ----------
             cell (Cell): considered cell.
+            visual (bool): True if the visualizaiton is active. False if not.
         """
         chr_id = np.random.choice(cell.DNA.IDs)
         del_pos = np.random.randint(0, cell.DNA.CHRs[chr_id - 1].length) 
@@ -275,6 +282,7 @@ class Simulator():
         Parameters
         ----------
             cell (Cell): considered cell.
+            visual (bool): True if the visualizaiton is active. False if not.
         """
         chr_id = np.random.choice(cell.DNA.IDs)
         repl_pos = np.random.randint(0, cell.DNA.CHRs[chr_id - 1].length) 
@@ -299,6 +307,7 @@ class Simulator():
             rec_transl_len_distrib (Method): probability distribution of the Reciprocal 
                                              Translocation length.
             dupl_len_distrib (Method): probability distribution of the Duplication length.
+            visual (bool): True if the visualizaiton is active. False if not.
         """
         r = np.random.rand()
         if r < cumulative_list[0]:
@@ -340,6 +349,7 @@ class Simulator():
             dupl_len_distrib (Method): probability distribution of the Duplication length.
             n_event_method (Method): probability distribution of the number of events in one cell
                                      duplication.
+            visual (bool): True if the visualizaiton is active. False if not.
 
         Returns
         -------
@@ -391,6 +401,7 @@ class Simulator():
             rec_transl_len_distrib (Method): probability distribution of the Reciprocal 
                                              Translocation length.
             dupl_len_distrib (Method): probability distribution of the Duplication length.
+            visual (bool): True if the visualizaiton is active. False if not.
         """
         if node.generation >= n_generations: 
             self.update_average_genome_length(node)
@@ -573,45 +584,46 @@ class Simulator():
                 st_dev[chr.ID - 1] += (chr.length - self.average_chromosome_length[chr.ID - 1])**2
         return np.sqrt(st_dev / (2 ** n_gen))
 
-
-
+## VISUALIZATION ####################################################################################
 
     def chromosome_visualizator(self, leaf_number):
+        """
+        Displays the chromosome of a selected leaf, highlighting locations where multiple 
+        Rearrangements/Mutations have occurred.
+
+        Parameters
+        ----------
+            leaf_number (int): number corresponding to the leaf of the simulation that we want to visualize.
+        
+        Raises
+        -----
+            Exception
+                If the option 'visual' is set to 'False', the function cannot display the result.
+        """
         if self.visual == False: raise Exception(f"The 'visual' option is set to 'False'.")
         Max = 0
         for chr in self.leaves[leaf_number].DNA.CHRs:
             max = np.amax(chr.visual)
             if max >= Max: Max = max
         scale_max_value = Max
-
         data = []
         fig, axs = plt.subplots(16, figsize = (20,9.9))
-
         fig.suptitle(f'Chromosomes of leaf n°{leaf_number} ({self.generations} generations)', fontname = 'Helvetica', fontsize = 24)
         for id in range(1,17):
             ax = axs[id-1]
             data.append([np.array(self.leaves[leaf_number].DNA.CHRs[id-1].visual)])
-            
             im = ax.imshow(data[id-1], aspect = 100000*len(data[id-1]), cmap='Greys', vmin = 0, vmax = scale_max_value, \
                 interpolation='nearest')
             ax.set_ylabel(f"CHR {id}", rotation=0, fontname = 'Helvetica', fontsize=15, labelpad=30)
-
             ax.xaxis.get_label()
             ax.axes.get_yaxis().set_ticks([])
             ax.axes.get_xaxis().set_ticks([])
-
-        fig.subplots_adjust(bottom=0., top=0.9, left=0., right=1,
-                            wspace=10, hspace=0.2)
+        fig.subplots_adjust(bottom=0., top=0.9, left=0., right=1, wspace=10, hspace=0.2)
         cbar = fig.colorbar(im, ax=axs.ravel().tolist(),  shrink=1.0)
         cbar.set_ticks(np.arange(0, scale_max_value, 1))
         cbar.ax.tick_params(labelsize = 18)
         cbar.ax.set_ylabel('Number of superposed mutations', rotation=270, fontname = 'Helvetica', fontsize = 18,labelpad=30)
-
         plt.show()
-
-
-
-
 
 
     def __init__(self, chromosome_table, n_gen, ave_events_num = 1, \
@@ -647,6 +659,7 @@ class Simulator():
                                              Translocation length. (default: int_trunc_uniform)
             dupl_len_distrib (Method): probability distribution of the Duplication length.
                                       (default: int_trunc_uniform)
+            visual (bool): True if the visualizaiton is active. False if not.
         """
         n_chr = len(chromosome_table)
         wt = WT_Cell(n_chr, chromosome_table, visual=visual)

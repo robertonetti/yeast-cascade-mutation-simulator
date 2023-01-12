@@ -19,24 +19,24 @@ class Insertion(Rearrangement):
 
     Methods
     -------
+    update_visual(self, chr: Chromosome):
+        Updates the "visual" array of the chromosome.
     reconstruct(self, node: Node):
         Reconstruction of the DNA sequence involved in the current Insertion, of the considered
         cell.
     """
-
     def update_visual(self, chr):
+        """
+        Updates the "visual" array of the chromosome.
+
+        Parameters
+        ----------
+            chr (Chromosome): chromosome involeved in the Deletion.
+        """
         inserted = np.zeros(self.Length)
         new_vis = np.concatenate((chr.visual[: self.Pos], inserted, chr.visual[self.Pos :]))
         if len(new_vis) != chr.length: raise Exception(f"visual {len(new_vis)}, chr {chr.length}")
-        
         chr.visual = new_vis
-
-
-
-
-
-
-
 
     def reconstruct(self, node: Node):
         """
@@ -55,13 +55,15 @@ class Insertion(Rearrangement):
     def __init__(self, ChrID :int, Pos :int, Length :int, cell = None, visual = False):
         """
         It defines the 'SubKind', and initializes 'ChrID', 'Pos' and 'Length' according to the given
-        parameters.
+        parameters. In the end updates the 'visual' array.
 
         Parameters
         ----------
             ChrID (int): ID of the chromosome involved.
             Pos (int): Initial position of the inserted sequence.
             Length (int): Length of the inserted sequence.
+            cell (Cell): Cell involved in the Insertion.
+            visual (bool): True if the visualizaiton is active. False if not.
         """
         super().__init__()
         self.SubKind = "Insertion"

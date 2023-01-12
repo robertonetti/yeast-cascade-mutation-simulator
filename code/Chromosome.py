@@ -10,18 +10,22 @@ class Chromosome:
         ID of the considered chromosome.
     length : int
         Length of the considered chromosome.
+    visual : list 
+        Array of the same length of the chromosome sequence. It contains an integer for each DNA base 
+        in the sequence, indicating how many times that base was involved in a Rearrangement/Mutataion.
     sequence : str
         DNA sequence of the considered chromosome.
     """
     def __init__(self, ID, length, visual = False):
         """
-        Checks if the "ID" of the chromosome is among the possible ones. Then initializes the "ID"
-        and its "length" based on the given vector "chromosome_lenghts".
+        Checks if the "ID" of the chromosome is among the possible ones. Then initializes the "ID", 
+        "length" and its "visual", based on the given vector "chromosome_lenghts".
 
         Parameters
         ----------
             ID (int): ID of the considered chromosome.
             length (int): length of the considered chromosome.
+            visual (bool): True if the visualizaiton is active. False if not.
 
         Raises
         ------

@@ -17,6 +17,8 @@ The further goal of the project is to build an algorithm that can reconstruct th
 This project requires the following libraries:
 - Numpy (https://numpy.org);
 - copy (https://docs.python.org/3/library/copy.html);
+- matplotlib.pyplot (https://matplotlib.org/3.5.3/api/_as_gen/matplotlib.pyplot.html);
+- subprocess (https://docs.python.org/3/library/subprocess.html).
 
 ## 2. Installation:
 To run the project, simply download the **code** folder. It contains all the necessary files.
@@ -51,7 +53,15 @@ The simulation is divided in two main steps: \
 **Step 1 (Simulation)**: effective simulation of the cell divisions; \
 **Step 2 (Reconstruction)**: reconstruction of the mutated sequences of the last cell generation or the cell at the end of a selected pathway.
 #### 3.3.1. Step 1 (Simulation):
-In this step we start with a Wild Type cell. After initializing the class according to the given parameters, we simulate its division up to the selected number of generations. For each cell division we randomly extract the number and types of mutational events occurring in the respective two daughters (during the considered division). The events will be stored in the attribute: **MUT_Cell.events**.
+In this step we start with a Wild Type cell. After initializing the class according to the given parameters, we simulate its division up to the selected number of generations. For each cell division we randomly extract the number and types of mutational events occurring in the respective two daughters (during the considered division). The events will be stored in the attribute: **MUT_Cell.events**.\
+##### 3.3.1.1 Step 1 (Data Visualization):
+Before launching **Step 1**, it is possible to choose whether the simulation should keep track of the information needed to visualize the result. The data visualization consists of highlighting the positions of the resulting chromosomes that have undergone multiple rearrangements/mutations, as can be seen in the following image:
+![Visualization](images/Visualization.png)
+Is it possible to activate this option setting in the initialization of the class **Simulator()**:
+```python
+visual=True
+```
+
 ##### Example:
 In this example we consider a WT cell with two chromosomes and a two-generation simulation.
 ```python 
@@ -66,7 +76,7 @@ chromosome_lengths = [int(5e4), int(6e4)] # list containing the lengths of the c
 chromosome_table = Utility.random_seq_initializer(chromosome_lengths) #creates a list containing one tuple (ID, sequence) for each chromosome
 
 # Step 1 (Simulation)
-simul = Simulator(chromosome_table, number_of_generations)
+simul = Simulator(chromosome_table, number_of_generations, visual=False)
 # access the parent node and all nodes in the tree
 print(simul.parent.data) # WT cell
 print(simul.parent.left) # left daughter of the first generation
@@ -166,6 +176,6 @@ random_chromosome_table = Utility.random_seq_initializer(chromosome_lengths)
 - [x] github repository;
 - [x] RAM usage test;
 - [x] elapsed time test;
-- [ ] data and results representation;
+- [x] data and results representation;
 - [ ] test of the regimes for different parameters;
 - [ ] application to real yeast cells.

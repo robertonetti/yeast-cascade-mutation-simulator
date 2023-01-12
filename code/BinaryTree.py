@@ -34,8 +34,7 @@ class Node():
         n_seqs = len(parent.data.DNA.CHRs)
         for i in range(n_seqs):
             self.data.DNA.CHRs[i].sequence = copy.deepcopy(parent.data.DNA.CHRs[i].sequence)
-            self.data.DNA.CHRs[i].visual = copy.deepcopy(parent.data.DNA.CHRs[i].visual)
-
+            
     def __init__(self, data = None, generation = 0):
         """
         It initializes the 'data' and 'generation' according to the given parameters.
@@ -48,7 +47,7 @@ class Node():
                               (default: 0)
         """
         self.data = data
-        self.generation  = generation
+        self.generation = generation
 
     left = None
     right = None

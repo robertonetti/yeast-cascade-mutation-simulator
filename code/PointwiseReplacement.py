@@ -15,18 +15,22 @@ class PointReplacement(Mutation):
         Position of the replaced DNA base.
 
     Methods
+    -------
+    update_visual(self, chr: Chromosome):
+        Updates the "visual" array of the chromosome.
     reconstruct(self, node: Node):
         Reconstruction of the DNA sequence involved in the current PointwiseReplacement, of the 
         considered cell.
     """
-
-
     def update_visual(self, chr):
+        """
+        Updates the "visual" array of the chromosome.
+
+        Parameters
+        ----------
+            chr (Chromosome): chromosome involved in the Deletion.
+        """
         chr.visual[self.Pos] += 1
-
-
-
-
 
     def reconstruct(self, node: Node):
         """
@@ -48,12 +52,14 @@ class PointReplacement(Mutation):
     def __init__(self, ChrID :int, Pos :int, cell = None, visual = False):
         """
         It defines the 'SubKind', and initializes 'ChrID' and 'Pos' according to the given 
-        parameters.
+        parameters. In the end updates the 'visual' array.
 
         Parameters
         ----------
             ChrID (int): ID of the chromosome involved.
             Pos (int): position of the replaced DNA base.
+            cell (Cell): Cell involved in the Deletion.
+            visual (bool): True if the visualizaiton is active. False if not.
         """
         super().__init__()
         self.SubKind = "Pointwise Replacement"

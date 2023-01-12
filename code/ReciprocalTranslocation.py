@@ -24,16 +24,20 @@ class ReciprocalTranslocation(Rearrangement):
 
     Methods
     -------
+    update_visual(self, chrs: tuple):
+        Updates the "visual" array of the chromosome.
     reconstruct(self, node: Node)
         Reconstruction of the DNA sequence involved in the current ReciprocalTranslocation, of the 
         considered cell.
     """
-
-
-
-
-
     def update_visual(self, chrs: tuple):
+        """
+        Updates the "visual" array of the chromosome.
+
+        Parameters
+        ----------
+            chrs (tuple): tuple of the two chromosome involved in the Deletion.
+        """
         translocated = chrs[0].visual[self.InitPos : self.InitPos + self.Length] + 1
         new_vis_1 = np.concatenate((chrs[0].visual[: self.InitPos], chrs[0].visual[self.InitPos + self.Length :]))
         new_vis_2 = np.concatenate((chrs[1].visual[: self.FinalPos], translocated, chrs[1].visual[self.FinalPos :]))
@@ -42,14 +46,6 @@ class ReciprocalTranslocation(Rearrangement):
         if self.InitPos  < len(new_vis_1): new_vis_1[self.InitPos] += 1
         if len(new_vis_2) != chrs[1].length: raise Exception(f"chr 2: visual={len(new_vis_2)}, chr_len={chrs[0].length}")
         chrs[0].visual, chrs[1].visual = new_vis_1, new_vis_2
-
-
-
-
-
-
-
-
 
     def reconstruct(self, node: Node):
         """
@@ -71,7 +67,7 @@ class ReciprocalTranslocation(Rearrangement):
     def __init__(self, ChrIDs :tuple, InitPos :int, Length :int, FinalPos :int, cell = None, visual = False):
         """
         It defines the 'SubKind', and initializes 'ChrID', 'InitPos', 'Length', 'FinalPos' according
-        to the given parameters.
+        to the given parameters. In the end updates the 'visual' array and cheks if the chromosome is deleted.
 
         Parameters
         ----------
@@ -82,6 +78,8 @@ class ReciprocalTranslocation(Rearrangement):
             Length (int): Length of the translocated sequence.
             FinalPos (int): Initial position (on the second chromosome) of the translocated sequence,
                             after translocation.
+            cell (Cell): Cell involved in the Deletion.
+            visual (bool): True if the visualizaiton is active. False if not.
         """
         super().__init__()
         self.SubKind = "Reciprocal Translocation"

@@ -22,21 +22,24 @@ class Duplication(Rearrangement):
 
     Methods
     -------
+    update_visual(self, chr: Chromosome):
+        Updates the "visual" array of the chromosome.
     reconstruct(self, node: Node):
         Reconstruction of the DNA sequence involved in the current Duplication, of the considered
         cell.
     """
-
     def update_visual(self, chr):
+        """
+        Updates the "visual" array of the chromosome.
+
+        Parameters
+        ----------
+            chr (Chromosome): chromosome involeved in the Deletion.
+        """
         duplicated = chr.visual[self.InitPos : self.InitPos + self.Length] + 1
         new_vis = np.concatenate((chr.visual[: self.FinalPos], duplicated, chr.visual[self.FinalPos :]))
         if len(new_vis) != chr.length: raise Exception(f"visual {len(new_vis)}, chr {chr.length}")
         chr.visual = new_vis
-
-
-
-
-
 
     def reconstruct(self, node: Node):
         """
@@ -56,7 +59,7 @@ class Duplication(Rearrangement):
     def __init__(self, ChrID :int, InitPos :int, Length :int, FinalPos :int, cell = None, visual = False):
         """
         It defines the 'SubKind', and initializes 'ChrID', 'InitPos', 'Length', 'FinalPos' according 
-        to the given parameters.
+        to the given parameters.  In the end updates the 'visual' array.
 
         Parameters
         ----------
@@ -64,6 +67,8 @@ class Duplication(Rearrangement):
             InitPos (int): Initial position of the duplicated sequence, before duplication.
             Length (int): Length of the duplicated sequence.
             FinalPos (int): Initial position of the copied sequence, after duplication.
+            cell (Cell): Cell involved in the Duplication.
+            visual (bool): True if the visualizaiton is active. False if not.
         """
         super().__init__()
         self.SubKind = "Duplication"

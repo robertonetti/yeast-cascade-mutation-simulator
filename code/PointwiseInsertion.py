@@ -17,26 +17,23 @@ class PointInsertion(Mutation):
 
     Methods
     -------
+    update_visual(self, chr: Chromosome):
+        Updates the "visual" array of the chromosome.
     reconstruct(self, node: Node):
         Reconstruction of the DNA sequence involved in the current PointwiseInsertion, of the 
         considered cell.
     """
-
-
     def update_visual(self, chr):
+        """
+        Updates the "visual" array of the chromosome.
+
+        Parameters
+        ----------
+            chr (Chromosome): chromosome involved in the Deletion.
+        """
         new_vis = np.concatenate((chr.visual[: self.Pos], np.array([1]), chr.visual[self.Pos :]))
         if len(new_vis) != chr.length: raise Exception(f"P.Insertion: visual {len(new_vis)}, chr {chr.length}")
-        
         chr.visual = new_vis
-
-
-
-
-
-
-
-
-
 
     def reconstruct(self, node: Node):
         """
@@ -55,11 +52,14 @@ class PointInsertion(Mutation):
     def __init__(self, ChrID :int, Pos :int, cell = None, visual = False):
         """
         Defines the 'SubKind', and initializes 'ChrID' and 'Pos' according to the given parameters.
+        In the end updates the 'visual' array.
 
         Parameters
         ----------
             ChrID (int): ID of the chromosome involved.
             Pos (int): position of the inserted DNA base.
+            cell (Cell): Cell involved in the Deletion.
+            visual (bool): True if the visualizaiton is active. False if not.
         """
         super().__init__()
         self.SubKind = "Pointwise Insertion"
@@ -70,7 +70,6 @@ class PointInsertion(Mutation):
             cell.DNA.CHRs[ChrID - 1].length += 1
             if visual == True : self.update_visual(cell.DNA.CHRs[ChrID - 1])
 
-    
     def __repr__(self):
         return f"Event->{self.kind}->{self.SubKind}(ChrId: {self.ChrID!r}, Pos: {self.Pos!r})"
 

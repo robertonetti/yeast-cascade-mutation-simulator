@@ -22,12 +22,21 @@ class Translocation(Rearrangement):
 
     Methods
     -------
+    update_visual(self, chr: Chromosome):
+        Updates the "visual" array of the chromosome.
     reconstruct(self, node: Node):
         Reconstruction of the DNA sequence involved in the current Translocation, of the considered
         cell.
     """
 
     def update_visual(self, chr):
+        """
+        Updates the "visual" array of the chromosome.
+
+        Parameters
+        ----------
+            chr (Chromosome): chromosome involved in the Deletion.
+        """
         translocated = chr.visual[self.InitPos : self.InitPos + self.Length] + 1
         new_vis = np.concatenate((chr.visual[: self.InitPos], chr.visual[self.InitPos + self.Length :]))
         new_vis = np.concatenate((new_vis[: self.FinalPos], translocated, new_vis[self.FinalPos :]))
@@ -36,23 +45,6 @@ class Translocation(Rearrangement):
         if self.InitPos  < len(new_vis): new_vis[self.InitPos] += 1
         chr.visual = new_vis
     
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     def reconstruct(self, node: Node):
         """
         Reconstruction of the DNA sequence involved in the current Translocation, in the considered
@@ -70,7 +62,7 @@ class Translocation(Rearrangement):
     def __init__(self, ChrID :int, InitPos :int, Length :int, FinalPos :int, cell = None, visual = False):
         """
         Defines the SubKind, and initializes ChrID, InitPos, Length, FinalPos according to the given
-        parameters.
+        parameters. In the end updates the 'visual' array.
 
         Parameters
         ----------
@@ -78,6 +70,8 @@ class Translocation(Rearrangement):
             InitPos (int): Initial position of the translocated sequence, before translocation.
             Length (int): Length of the translocated sequence.
             FinalPos (int): Initial position of the translocated sequence, after translocation.
+            cell (Cell): Cell involved in the Deletion.
+            visual (bool): True if the visualizaiton is active. False if not.
         """
         super().__init__()
         self.SubKind = "Translocation"
