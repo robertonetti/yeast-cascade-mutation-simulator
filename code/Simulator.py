@@ -48,49 +48,49 @@ class Simulator():
 
     Methods Generating Random Rearrangement
     ---------------------------------------
-    rand_insertion(self, cell: Cell, length_extraction_method)
+    rand_insertion(self, cell: Cell, length_extraction_method, visual: bool)
         It generates a random Insertion, according to a given distirbution. Then calls the function 
         that adds it to the events of the considered cell.
-    rand_deletion(self, cell :Cell, length_extraction_method)
+    rand_deletion(self, cell :Cell, length_extraction_method, visual: bool)
         It generates a random Deletion, according to a given distirbution. Then calls the function 
         that adds it to the events of the considered cell.
-    rand_translocation(self, cell :Cell, length_extraction_method)
+    rand_translocation(self, cell :Cell, length_extraction_method, visual: bool)
         It generates a random Translocation, according to a given distirbution. Then calls the function 
         that adds it to the events of the considered cell.
-    rand_reciprocal_translocation(self, cell :Cell, length_extraction_method)
+    rand_reciprocal_translocation(self, cell :Cell, length_extraction_method, visual: bool)
         It generates a random Reciprocal Translocation, according to a given distirbution. Then calls
         the function that adds it to the events of the considered cell.
-    rand_duplication(self, cell :Cell, length_extraction_method)
+    rand_duplication(self, cell :Cell, length_extraction_method, visual: bool)
         It generates a random Duplication, according to a given distirbution. Then calls the function
         that adds it to the events of the considered cell.
 
     Methods Generating Random Mutation
     ----------------------------------
-    rand_point_insertion(self, cell: Cell)
+    rand_point_insertion(self, cell: Cell, visual: bool)
         It generates a random Pointwise Insertion, drawing its position from a Uniform distribution.
         Then calls the function that adds it to the events of the considered cell.
-    rand_point_deletion(self, cell :Cell)
+    rand_point_deletion(self, cell :Cell, visual: bool)
         It generates a random Pointwise Deletion, drawing its position from a Uniform distribution.
         Then calls the function that adds it to the events of the considered cell.
-    rand_point_replacement(self, cell :Cell)
+    rand_point_replacement(self, cell :Cell, visual: bool)
         It generates a random Pointwise Replacement, drawing its position from a Uniform distribution.
         Then calls the function that adds it to the events of the considered cell.
 
     Methods for Cell Duplication & Growth
     -------------------------------------
     random_choice(self, cell: Cell, cumulative_list :list, del_len_distrib, ins_len_distrib,
-                  transl_len_distrib, rec_transl_len_distrib, dupl_len_distrib)
+                  transl_len_distrib, rec_transl_len_distrib, dupl_len_distrib, visual: bool)
         Given that an event happens, this funciton chooses which event happen according to the
         cumulative probability given in 'cumulative_list'.
     node_duplication(self, node: Node, cumulative_list :list, ave_events_num, del_len_distrib,
                      ins_len_distrib, transl_len_distrib, rec_transl_len_distrib, dupl_len_distrib,
-                     n_event_method)
+                     n_event_method, visual: bool)
         Given the current 'node' and the distribution of the number of events in one duplication
         (n_ave_method), it creates two doughter nodes, and calls 'random_choice' to add the
         extracted number of events to them.
     growth(self, node :Node, n_generations :int, ave_events_num, cumulative_list, n_event_method,
            del_len_distrib, ins_len_distrib, transl_len_distrib, rec_transl_len_distrib,
-           dupl_len_distrib)
+           dupl_len_distrib, visual: bool)
         Recurrent functions that starting with one Wild Type Cell (in a node) calls itself 
         duplicating every time each node, up to 'n_generations' generations. The result is a Binary
         Tree accessible from the parent node (WT Cell).
