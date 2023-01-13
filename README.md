@@ -55,7 +55,7 @@ The simulation is divided in two main steps: \
 **Step 1 (Simulation)**: effective simulation of the cell divisions; \
 **Step 2 (Reconstruction)**: reconstruction of the mutated sequences of the last cell generation or the cell at the end of a selected pathway.
 #### 3.3.1. Step 1 (Simulation):
-In this step we start with a Wild Type cell. After initializing the class according to the given parameters, we simulate its division up to the selected number of generations. For each cell division we randomly extract the number and types of mutational events occurring in the respective two daughters (during the considered division). The events will be stored in the attribute: **MUT_Cell.events**.\
+In this step we start with a Wild Type cell. After initializing the class according to the given parameters, we simulate its division up to the selected number of generations. For each cell division we randomly extract the number and types of mutational events occurring in the respective two daughters (during the considered division). The events will be stored in the attribute: **MUT_Cell.events**.
 ##### 3.3.1.1 Step 1 (Data Visualization):
 Before launching **Step 1**, it is possible to choose whether the simulation should keep track of the information needed to visualize the result. The data visualization consists of highlighting the positions of the resulting chromosomes that have undergone multiple rearrangements/mutations, as can be seen in the following image:
 ![Visualization](images/Visualization.png)
