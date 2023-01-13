@@ -498,10 +498,9 @@ class Simulator():
             doughter1, doughter2 = parent.left, parent.right
             self.single_doughter_reconstructor(parent, doughter1)
             self.single_doughter_reconstructor(parent, doughter2)
-        # CHECK ##################################
+        # DELETE ##################################
             for chr in parent.data.DNA.CHRs:
-                del(chr.sequence)
-            gc.collect()
+                chr.sequence = []
         ##########################################
             self.reconstructor(doughter1, n_generations, chromosome_table)
             self.reconstructor(doughter2, n_generations, chromosome_table)
@@ -538,7 +537,7 @@ class Simulator():
                 self.single_doughter_reconstructor(current_node, current_node.left)
             # CHECK ##################################
                 for chr in current_node.data.DNA.CHRs:
-                    del(chr.sequence)
+                    chr.sequence = []
             ###########################################
                 current_node = current_node.left
             elif direction == 1: 
@@ -632,6 +631,55 @@ class Simulator():
         #plt.show()
         plt.close(fig)
         return fig
+
+
+    def visualizator(self, parent: Node, n_generations: int, chromosome_table :list):
+        """
+        Recurrent functions that starting with 'parent' node (from which the all tree of new 
+        generations is accessible) calls itself reconstructing every time both the doughters of the
+        parent, up to 'n_generations' generations. In the end only the leaves of the 'n_generation' 
+        generation will contain the modified sequences.
+
+        Parameters
+        ----------
+            parent (Node): ancestor (WT) cell from which the recostruction will begin.
+            n_generations (int): number of generations that we want to reconstruct.
+            chromosome_table (list): list of tuple. Each tuple contains the chromosome ID and its
+                                     sequence.
+        """
+        if n_generations < self.generations and parent.generation == 0: 
+            print(f"The generations you want to reconstruct ({n_generations}) are less than the \
+                    possible ones ({self.generations})")
+        if parent.generation >= n_generations: return
+        else:
+            if type(parent.data) == WT_Cell: 
+                for chr in parent.data.DNA.CHRs
+
+
+
+                self.WT_sequence_initializer(parent.data, chromosome_table)
+            doughter1, doughter2 = parent.left, parent.right
+            self.single_doughter_reconstructor(parent, doughter1)
+            self.single_doughter_reconstructor(parent, doughter2)
+        # DELETE ##################################
+            for chr in parent.data.DNA.CHRs:
+                chr.sequence = []
+        ##########################################
+            self.reconstructor(doughter1, n_generations, chromosome_table)
+            self.reconstructor(doughter2, n_generations, chromosome_table)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

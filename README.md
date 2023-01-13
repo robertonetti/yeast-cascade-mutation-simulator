@@ -181,3 +181,12 @@ random_chromosome_table = Utility.random_seq_initializer(chromosome_lengths)
 - [x] data and results representation;
 - [ ] test of the regimes for different parameters;
 - [ ] application to real yeast cells.
+
+
+# TO DO: 
+- [ ] create a different function for visualization, 
+- [ ] eliminate repeated attributes in class diagrams;
+- [ ] create chapter "Usage" with all the examples;
+- [ ] create chapter "Implementation" with class structure, implementation of the SImulator etc.. ;
+- [ ] check if you can remove the parameter "chromosome_table" when calling "reconstructor()";
+- [ ] create chapter "Visualization";
