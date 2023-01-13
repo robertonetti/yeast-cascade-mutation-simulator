@@ -43,9 +43,11 @@ The fundamental class is **Cell** which has two subclasses **WT_Cell** (Wild Typ
 In addition, only the **MUT_Cell** has as another attribute a list of **Event** representing the mutation events that happened to the respective cell. The **Event** class has two subclasses, the first called **Mutation** is in turn subdivided into: **PointwiseDeletion**, **PointwiseInsertion** and **PointwiseReplacement**. These are mutational events involving a single DNA base.
 The other subclass of **Event** is **Rarrangement**, which is divided into:
 **Deletion**, **Insertion**, **Translocation**, **TranslocationReciprocation** and **Duplication**. They can involve many DNA bases and more than one chromosome
-
+#### Simulator & Utility classes:
 ![Simulator](images/Simulator.png)
+#### Cells, DNA & events classes:
 ![Cells](images/Cells.png)
+#### Binary tree classes:
 ![Nodes](images/Nodes.png)
 
 ### 3.3. Structure of the Simulator:
