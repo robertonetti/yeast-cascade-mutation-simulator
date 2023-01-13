@@ -629,8 +629,47 @@ class Simulator():
         cbar.set_ticks(np.arange(0, scale_max_value, 1))
         cbar.ax.tick_params(labelsize = 18)
         cbar.ax.set_ylabel('Number of superposed mutations', rotation=270, fontname = 'Helvetica', fontsize = 18,labelpad=30)
-        plt.show()
+        #plt.show()
+        plt.close(fig)
+        return fig
 
+
+
+
+
+
+
+
+    def stat_max_superposed_mutations(self):
+        if self.visual == False: raise Exception(f"The 'visual' option is set to 'False'.")
+        ave = 0
+        mom2 = 0
+        Max = 0
+        for leaf in self.leaves:
+            for chr in leaf.DNA.CHRs:
+                max = np.amax(chr.visual)
+                if max >= Max: Max = max
+            ave += Max
+            mom2 += np.power(Max, 2)
+        ave /= len(self.leaves)
+        stdv = np.sqrt(mom2/len(self.leaves) - np.power(ave,2))
+        return ave, stdv
+
+    def stat_superposed_mutations(self):
+        if self.visual == False: raise Exception(f"The 'visual' option is set to 'False'.")
+        ave = 0
+        mom2 = 0
+        for leaf in self.leaves:
+            for chr in leaf.DNA.CHRs:
+                max = np.amax(chr.visual)
+                ave += max
+                mom2 += np.power(max,2)
+        ave /= len(self.leaves) * len(leaf.DNA.CHRs)
+        mom2 /= len(self.leaves) * len(leaf.DNA.CHRs)
+        stdv = np.sqrt(mom2 - np.power(ave,2))
+        return ave, stdv
+
+    
 
     def __init__(self, chromosome_table, n_gen, ave_events_num = 1, \
                  cumulative_list = [1./7, 2./7, 3./7, 4./7, 5./7, 6./7, 1.], \
