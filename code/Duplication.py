@@ -28,7 +28,7 @@ class Duplication(Rearrangement):
         Reconstruction of the DNA sequence involved in the current Duplication, of the considered
         cell.
     """
-    def update_visual(self, chr):
+    def update_visual(self, node: Node):
         """
         Updates the "visual" array of the chromosome.
 
@@ -36,6 +36,7 @@ class Duplication(Rearrangement):
         ----------
             chr (Chromosome): chromosome involeved in the Deletion.
         """
+        chr = node.data.DNA.CHRs[self.ChrID - 1]
         duplicated = chr.visual[self.InitPos : self.InitPos + self.Length] + 1
         new_vis = np.concatenate((chr.visual[: self.FinalPos], duplicated, chr.visual[self.FinalPos :]))
         if len(new_vis) != chr.length: raise Exception(f"visual {len(new_vis)}, chr {chr.length}")
@@ -79,7 +80,7 @@ class Duplication(Rearrangement):
         if cell != None:
             cell.events.append(self)
             cell.DNA.CHRs[ChrID - 1].length += self.Length
-            if visual == True : self.update_visual(cell.DNA.CHRs[ChrID - 1])
+            
 
     def __repr__(self):
         return f"Event->{self.kind}->{self.SubKind}(ChrId: {self.ChrID!r}, InitPos: {self.InitPos!r}, Length: {self.Length!r}, FinalPos: {self.FinalPos!r})"

@@ -25,7 +25,7 @@ class Insertion(Rearrangement):
         Reconstruction of the DNA sequence involved in the current Insertion, of the considered
         cell.
     """
-    def update_visual(self, chr):
+    def update_visual(self, node: Node):
         """
         Updates the "visual" array of the chromosome.
 
@@ -33,6 +33,7 @@ class Insertion(Rearrangement):
         ----------
             chr (Chromosome): chromosome involeved in the Deletion.
         """
+        chr = node.data.DNA.CHRs[self.ChrID - 1]
         inserted = np.zeros(self.Length)
         new_vis = np.concatenate((chr.visual[: self.Pos], inserted, chr.visual[self.Pos :]))
         if len(new_vis) != chr.length: raise Exception(f"visual {len(new_vis)}, chr {chr.length}")
@@ -52,7 +53,7 @@ class Insertion(Rearrangement):
         node.data.DNA.CHRs[chrID - 1].sequence = node.data.DNA.CHRs[chrID - 1].sequence[ : init_pos] \
                                  + new_seq + node.data.DNA.CHRs[chrID - 1].sequence[init_pos : ]
 
-    def __init__(self, ChrID :int, Pos :int, Length :int, cell = None, visual = False):
+    def __init__(self, ChrID :int, Pos :int, Length :int, cell = None):
         """
         It defines the 'SubKind', and initializes 'ChrID', 'Pos' and 'Length' according to the given
         parameters. In the end updates the 'visual' array.
@@ -73,7 +74,6 @@ class Insertion(Rearrangement):
         if cell != None:
             cell.events.append(self)
             cell.DNA.CHRs[ChrID - 1].length += self.Length
-            if visual == True : self.update_visual(cell.DNA.CHRs[ChrID - 1])
     
     def __repr__(self):
         return f"Event->{self.kind}->{self.SubKind}(ChrId: {self.ChrID!r}, Pos: {self.Pos!r}, Length: {self.Length!r})"

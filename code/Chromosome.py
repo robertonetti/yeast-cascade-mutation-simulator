@@ -16,7 +16,7 @@ class Chromosome:
     sequence : str
         DNA sequence of the considered chromosome.
     """
-    def __init__(self, ID, length, visual = False):
+    def __init__(self, ID, length):
         """
         Checks if the "ID" of the chromosome is among the possible ones. Then initializes the "ID", 
         "length" and its "visual", based on the given vector "chromosome_lenghts".
@@ -35,8 +35,9 @@ class Chromosome:
         if ID <= 0 : raise Exception(f"ID cannot be smaller than 0!")
         self.ID = ID
         self.length = length
-        if visual == True : self.visual = np.zeros(length)
+        
     sequence = None
+    visual = None
 
     def __repr__(self):
         return f"Chromosome(ID: {self.ID!r}, length: {self.length!r}, sequence: {self.sequence!r})"

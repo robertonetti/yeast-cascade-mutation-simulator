@@ -30,7 +30,7 @@ class ReciprocalTranslocation(Rearrangement):
         Reconstruction of the DNA sequence involved in the current ReciprocalTranslocation, of the 
         considered cell.
     """
-    def update_visual(self, chrs: tuple):
+    def update_visual(self, node: Node):
         """
         Updates the "visual" array of the chromosome.
 
@@ -38,6 +38,7 @@ class ReciprocalTranslocation(Rearrangement):
         ----------
             chrs (tuple): tuple of the two chromosome involved in the Deletion.
         """
+        chrs = (node.data.DNA.CHRs[self.ChrIDs[0] - 1], node.data.DNA.CHRs[self.ChrIDs[0] - 1])
         translocated = chrs[0].visual[self.InitPos : self.InitPos + self.Length] + 1
         new_vis_1 = np.concatenate((chrs[0].visual[: self.InitPos], chrs[0].visual[self.InitPos + self.Length :]))
         new_vis_2 = np.concatenate((chrs[1].visual[: self.FinalPos], translocated, chrs[1].visual[self.FinalPos :]))
@@ -64,7 +65,7 @@ class ReciprocalTranslocation(Rearrangement):
         node.data.DNA.CHRs[chrIDs[1] - 1].sequence = node.data.DNA.CHRs[chrIDs[1] - 1].sequence[ : final_pos] \
             + transl_seq + node.data.DNA.CHRs[chrIDs[1] - 1].sequence[final_pos : ]
 
-    def __init__(self, ChrIDs :tuple, InitPos :int, Length :int, FinalPos :int, cell = None, visual = False):
+    def __init__(self, ChrIDs :tuple, InitPos :int, Length :int, FinalPos :int, cell = None):
         """
         It defines the 'SubKind', and initializes 'ChrID', 'InitPos', 'Length', 'FinalPos' according
         to the given parameters. In the end updates the 'visual' array and cheks if the chromosome is deleted.
@@ -91,8 +92,6 @@ class ReciprocalTranslocation(Rearrangement):
             cell.events.append(self)
             cell.DNA.CHRs[ChrIDs[0] - 1].length -= self.Length
             cell.DNA.CHRs[ChrIDs[1] - 1].length += self.Length
-            chrs = (cell.DNA.CHRs[ChrIDs[0] - 1], cell.DNA.CHRs[ChrIDs[1] - 1])
-            if visual == True : self.update_visual(chrs)
             if cell.DNA.CHRs[ChrIDs[0] - 1].length == 0:
                 cell.DNA.IDs.remove(ChrIDs[0])
                 print(f"(generation: {cell.generation}) Chromosome {ChrIDs[0]} has been removed! The events was a {self}.")

@@ -29,7 +29,7 @@ class Translocation(Rearrangement):
         cell.
     """
 
-    def update_visual(self, chr):
+    def update_visual(self, node: Node):
         """
         Updates the "visual" array of the chromosome.
 
@@ -37,6 +37,7 @@ class Translocation(Rearrangement):
         ----------
             chr (Chromosome): chromosome involved in the Deletion.
         """
+        chr = node.data.DNA.CHRs[self.ChrID - 1]
         translocated = chr.visual[self.InitPos : self.InitPos + self.Length] + 1
         new_vis = np.concatenate((chr.visual[: self.InitPos], chr.visual[self.InitPos + self.Length :]))
         new_vis = np.concatenate((new_vis[: self.FinalPos], translocated, new_vis[self.FinalPos :]))
@@ -59,7 +60,7 @@ class Translocation(Rearrangement):
         node.data.DNA.CHRs[chrID - 1].sequence = node.data.DNA.CHRs[chrID - 1].sequence[ : init_pos] +  node.data.DNA.CHRs[chrID - 1].sequence[end_pos : ]
         node.data.DNA.CHRs[chrID - 1].sequence = node.data.DNA.CHRs[chrID - 1].sequence[ : final_pos] + transl_seq + node.data.DNA.CHRs[chrID - 1].sequence[final_pos : ]
 
-    def __init__(self, ChrID :int, InitPos :int, Length :int, FinalPos :int, cell = None, visual = False):
+    def __init__(self, ChrID :int, InitPos :int, Length :int, FinalPos :int, cell = None):
         """
         Defines the SubKind, and initializes ChrID, InitPos, Length, FinalPos according to the given
         parameters. In the end updates the 'visual' array.
@@ -81,7 +82,6 @@ class Translocation(Rearrangement):
         self.FinalPos = FinalPos
         if cell != None:
             cell.events.append(self)
-            if visual == True : self.update_visual(cell.DNA.CHRs[ChrID - 1])
     
     def __repr__(self):
         return f"Event->{self.kind}->{self.SubKind}(ChrId: {self.ChrID!r}, InitPos: {self.InitPos!r}, Length: {self.Length!r}, FinalPos: {self.FinalPos!r})"

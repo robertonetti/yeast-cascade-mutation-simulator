@@ -633,7 +633,7 @@ class Simulator():
         return fig
 
 
-    def visualizator(self, parent: Node, n_generations: int, chromosome_table :list):
+    def visualizator(self, parent: Node, n_generations: int):
         """
         Recurrent functions that starting with 'parent' node (from which the all tree of new 
         generations is accessible) calls itself reconstructing every time both the doughters of the
@@ -652,24 +652,61 @@ class Simulator():
                     possible ones ({self.generations})")
         if parent.generation >= n_generations: return
         else:
+            # initialize wt cell visual
             if type(parent.data) == WT_Cell: 
-                for chr in parent.data.DNA.CHRs
-
-
-
-                self.WT_sequence_initializer(parent.data, chromosome_table)
+                for chr in parent.data.DNA.CHRs:
+                    chr.visual = np.zeros(chr.lenght)
             doughter1, doughter2 = parent.left, parent.right
-            self.single_doughter_reconstructor(parent, doughter1)
-            self.single_doughter_reconstructor(parent, doughter2)
+
+
+
+            self.single_doughter_visualizetor(parent, doughter1)
+            self.single_doughter_visualizetor(parent, doughter2)
         # DELETE ##################################
             for chr in parent.data.DNA.CHRs:
-                chr.sequence = []
+                chr.visual = []
         ##########################################
-            self.reconstructor(doughter1, n_generations, chromosome_table)
-            self.reconstructor(doughter2, n_generations, chromosome_table)
+            self.visualizator(doughter1, n_generations)
+            self.visualizator(doughter2, n_generations)
 
 
+    def single_doughter_visualizetor(self, parent: Node, doughter: Node):
+        """
+        It copies the DNA sequences from the parent to the doughter cell. Then it modifies them 
+        according to the new events present in the doughter cell.
 
+        Parameters
+        ----------
+            parent (Node): parent cell from which the DNA sequences will be copied.
+            doughter (Node): doughter cell in which the DNA sequences will be copied and modified.
+
+        Methods
+        -------
+            check_chr_length(): cheks if the parent cell has the correct number of DNA bases.
+        """
+        def check_chr_length():
+            """
+            It checks if the parent cell has the correct number of DNA bases.
+
+            Raises
+            ------
+                Exception
+                    If the chromosome length does not corresponde to the effective length of the
+                    sequences.
+            """
+            # check if visual in the parent has the correct length
+            for chr in doughter.data.DNA.CHRs:
+                if chr.length != len(chr.visual): 
+                    raise Exception(f"Chromosome lenght ({chr.length}) does not correspond to the length of 'visual' array ({len(chr.sequence)})")
+        
+        # copy the visual array from parent
+        n_chr = len(parent.data.DNA.CHRs)
+        for i in range(n_chr):
+            doughter.data.DNA.CHRs[i].visual = copy.deepcopy(parent.data.DNA.CHRs[i].visual)
+
+        for event in doughter.data.events:
+            event.update_visual(doughter)
+        check_chr_length()
 
 
 

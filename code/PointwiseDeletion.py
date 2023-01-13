@@ -24,7 +24,7 @@ class PointDeletion(Mutation):
         considered cell.
     """
 
-    def update_visual(self, chr):
+    def update_visual(self, node: Node):
         """
         Updates the "visual" array of the chromosome.
 
@@ -32,6 +32,7 @@ class PointDeletion(Mutation):
         ----------
             chr (Chromosome): chromosome involeved in the Deletion.
         """
+        chr = node.data.DNA.CHRs[self.ChrID - 1]
         new_vis = np.concatenate((chr.visual[: self.Pos], chr.visual[self.Pos + 1 :]))
         if len(new_vis) != chr.length: raise Exception(f"visual {len(new_vis)}, chr {chr.length}")
         if self.Pos - 1 >= 0: 
@@ -53,7 +54,7 @@ class PointDeletion(Mutation):
         node.data.DNA.CHRs[chrID - 1].sequence = node.data.DNA.CHRs[chrID - 1].sequence[ : del_pos]\
              +  node.data.DNA.CHRs[chrID - 1].sequence[del_pos + 1 : ]
     
-    def __init__(self, ChrID :int, Pos :int, cell = None, visual = False):
+    def __init__(self, ChrID :int, Pos :int, cell = None):
         """
         It defines the 'SubKind', and initializes 'ChrID' and 'Pos' according to the given 
         parameters.In the end updates the 'visual' array and cheks if the chromosome is deleted.
@@ -72,7 +73,6 @@ class PointDeletion(Mutation):
         if cell != None:
             cell.events.append(self)
             cell.DNA.CHRs[ChrID - 1].length -= 1
-            if visual == True : self.update_visual(cell.DNA.CHRs[ChrID - 1])
             if cell.DNA.CHRs[ChrID - 1].length == 0:
                 cell.DNA.IDs.remove(ChrID)
                 print(f"(generation: {cell.generation}) Chromosome {ChrID} has been removed! \n The event was a {self}.\n")

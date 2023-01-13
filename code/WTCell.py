@@ -34,7 +34,7 @@ class WT_Cell(Cell):
         """
         self.kind = "Wild Type"
         self.generation = generation
-        self.DNA = DNA([Chromosome(id, len(chromosome_table[id - 1][1]), visual=visual) for id in range(1, n_chromosomes + 1)])
+        self.DNA = DNA([Chromosome(id, len(chromosome_table[id - 1][1])) for id in range(1, n_chromosomes + 1)])
 
     def __repr__(self):
         return f"Cell(kind: {self.kind!r}, generation: {self.generation!r})"
