@@ -188,10 +188,11 @@ random_chromosome_table = Utility.random_seq_initializer(chromosome_lengths)
 - [x] update documentation of Simulator to consider the previous point;
 - [x] check the functions that compute stats for cumulated mutation;
 - [x] update documentation of Simulator to consider the previous point;
-- [ ] eliminate repeated attributes in class diagrams;
+- [x] check if you can remove the parameter "chromosome_table" when calling "reconstructor()";
+- [x] create program to read from file;
+
 - [ ] create chapter "Usage" with all the examples;
 - [ ] create chapter "Implementation" with class structure, implementation of the Simulator etc.. ;
-- [x] check if you can remove the parameter "chromosome_table" when calling "reconstructor()";
 - [ ] create chapter "Visualization";
-- [ ] create program to read from file;
 - [ ] create folder for Jupyter notebooks;
+- [ ] eliminate repeated attributes in class diagrams;

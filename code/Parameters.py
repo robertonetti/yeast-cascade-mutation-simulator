@@ -44,10 +44,4 @@ chromosome_number = 16
 
 #chromosome_table = Utility.random_seq_initializer(chromosome_lengths)
 
-# READ CHROMOSOME TABLE FROM FILE
-g = open("chromosome_list.txt", "r")
-chromosome_table = []
-ID = 0
-for line in g:
-    ID+=1
-    chromosome_table.append(tuple([ID, line]))
+chromosome_table = Utility.read_file()

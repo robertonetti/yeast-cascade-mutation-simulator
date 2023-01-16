@@ -44,7 +44,7 @@ class Utility:
         distribution with average "n_ave".
 
     Methods Chromosome Sequences Initialization
-    ---------------------------------------
+    -------------------------------------------
     random_sequence(self, n_bases :int) -> list
         It creates a DNA sequence of random bases of length 'n_bases'.
     reference_seq_builder(self, n_chromosomes: int, chromosome_lengths) -> list
@@ -55,6 +55,13 @@ class Utility:
     A_seq_initializer(chromosome_lengths :list)
         Given an array containing the lenghts of the chromosomes and the number of chromosomes, it
         creates a 'chromosome_table' with sequences completely composed by the base 'A'.
+    
+    Methods to Read Chromosome Table from File
+    ------------------------------------------
+    read_file(): -> list
+        Reads the parameter 'chromosome_table' from a file: chromosome_table.txt. 
+        In this file each line contains the sequence of the corrsponding chromosome in order from 
+        chromosome 1 to the last one.
     """
     output = []
 
@@ -286,4 +293,19 @@ class Utility:
         id = 1
         for id in range(1, n_chr + 1):
             chromosome_table.append((id, "A"*chromosome_lengths[id - 1]))
+        return chromosome_table
+
+    def read_file():
+        """
+        Reads the parameter 'chromosome_table' from a file: chromosome_table.txt. 
+        In this file each line contains the sequence of the corrsponding chromosome in order from 
+        chromosome 1 to the last one.
+        """
+        f = open("code/chromosome_list.txt", "r")
+        chromosome_table = []
+        ID = 0
+        for line in f:
+            ID+=1
+            line = line.rstrip()
+            chromosome_table.append(tuple([ID, line]))
         return chromosome_table
