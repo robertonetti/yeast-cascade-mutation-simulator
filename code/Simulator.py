@@ -48,49 +48,49 @@ class Simulator():
 
     Methods Generating Random Rearrangement
     ---------------------------------------
-    rand_insertion(self, cell: Cell, length_extraction_method, visual: bool)
+    rand_insertion(self, cell: Cell, length_extraction_method)
         It generates a random Insertion, according to a given distirbution. Then calls the function 
         that adds it to the events of the considered cell.
-    rand_deletion(self, cell :Cell, length_extraction_method, visual: bool)
+    rand_deletion(self, cell :Cell, length_extraction_method)
         It generates a random Deletion, according to a given distirbution. Then calls the function 
         that adds it to the events of the considered cell.
-    rand_translocation(self, cell :Cell, length_extraction_method, visual: bool)
+    rand_translocation(self, cell :Cell, length_extraction_method)
         It generates a random Translocation, according to a given distirbution. Then calls the function 
         that adds it to the events of the considered cell.
-    rand_reciprocal_translocation(self, cell :Cell, length_extraction_method, visual: bool)
+    rand_reciprocal_translocation(self, cell :Cell, length_extraction_method)
         It generates a random Reciprocal Translocation, according to a given distirbution. Then calls
         the function that adds it to the events of the considered cell.
-    rand_duplication(self, cell :Cell, length_extraction_method, visual: bool)
+    rand_duplication(self, cell :Cell, length_extraction_method)
         It generates a random Duplication, according to a given distirbution. Then calls the function
         that adds it to the events of the considered cell.
 
     Methods Generating Random Mutation
     ----------------------------------
-    rand_point_insertion(self, cell: Cell, visual: bool)
+    rand_point_insertion(self, cell: Cell)
         It generates a random Pointwise Insertion, drawing its position from a Uniform distribution.
         Then calls the function that adds it to the events of the considered cell.
-    rand_point_deletion(self, cell :Cell, visual: bool)
+    rand_point_deletion(self, cell :Cell)
         It generates a random Pointwise Deletion, drawing its position from a Uniform distribution.
         Then calls the function that adds it to the events of the considered cell.
-    rand_point_replacement(self, cell :Cell, visual: bool)
+    rand_point_replacement(self, cell :Cell)
         It generates a random Pointwise Replacement, drawing its position from a Uniform distribution.
         Then calls the function that adds it to the events of the considered cell.
 
     Methods for Cell Duplication & Growth
     -------------------------------------
     random_choice(self, cell: Cell, cumulative_list :list, del_len_distrib, ins_len_distrib,
-                  transl_len_distrib, rec_transl_len_distrib, dupl_len_distrib, visual: bool)
+                  transl_len_distrib, rec_transl_len_distrib, dupl_len_distrib)
         Given that an event happens, this funciton chooses which event happen according to the
         cumulative probability given in 'cumulative_list'.
     node_duplication(self, node: Node, cumulative_list :list, ave_events_num, del_len_distrib,
                      ins_len_distrib, transl_len_distrib, rec_transl_len_distrib, dupl_len_distrib,
-                     n_event_method, visual: bool)
+                     n_event_method)
         Given the current 'node' and the distribution of the number of events in one duplication
         (n_ave_method), it creates two doughter nodes, and calls 'random_choice' to add the
         extracted number of events to them.
     growth(self, node :Node, n_generations :int, ave_events_num, cumulative_list, n_event_method,
            del_len_distrib, ins_len_distrib, transl_len_distrib, rec_transl_len_distrib,
-           dupl_len_distrib, visual: bool)
+           dupl_len_distrib)
         Recurrent functions that starting with one Wild Type Cell (in a node) calls itself 
         duplicating every time each node, up to 'n_generations' generations. The result is a Binary
         Tree accessible from the parent node (WT Cell).
@@ -118,7 +118,7 @@ class Simulator():
         reconstructs the sequence of the leaf corresponding to the path.
     
     Methods for cumulated mutation visualization
-    --------------------------------
+    --------------------------------------------
     run_visualization(self, parent: Node, n_generations: int):
         It runs the process that starts from the root of the bunary tree and reconstruct the array for
         the visualization of the comulated mutations.
@@ -143,10 +143,10 @@ class Simulator():
         It updates the length of each chromosome in order to comute the average.
     chromosome_std_dev(self, n_chr: int, n_gen: int)
         It computes the Standard Deviation of the final length of each Chromosome.
-    stat_max_superposed_mutations(self)
+    stat_max_cumulated_mutations(self)
         Computes average and standard deviation of the maximum number (between different chromosme of
         a cell) of cumulated mutations over each leaf of the simulated binary tree.
-    stat_superposed_mutations(self):
+    stat_cumulated_mutations(self):
         Computes average and standard deviation of the number of cumulated mutations over each 
         chromosome of each leaf of the simulated binary tree.
     """
@@ -724,7 +724,7 @@ class Simulator():
                 st_dev[chr.ID - 1] += (chr.length - self.average_chromosome_length[chr.ID - 1])**2
         return np.sqrt(st_dev / (2 ** n_gen))
 
-    def stat_max_superposed_mutations(self):
+    def stat_max_cumulated_mutations(self):
         """
         Computes average and standard deviation of the maximum number (between different chromosme of
         a cell) of cumulated mutations over each leaf of the simulated binary tree.
@@ -748,7 +748,7 @@ class Simulator():
         stdv = np.sqrt(mom2/len(self.leaves) - np.power(ave,2))
         return ave, stdv
 
-    def stat_superposed_mutations(self):
+    def stat_cumulated_mutations(self):
         """
         Computes average and standard deviation of the number of cumulated mutations over each 
         chromosome of each leaf of the simulated binary tree.

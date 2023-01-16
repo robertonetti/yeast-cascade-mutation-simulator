@@ -190,9 +190,8 @@ random_chromosome_table = Utility.random_seq_initializer(chromosome_lengths)
 - [x] update documentation of Simulator to consider the previous point;
 - [x] check if you can remove the parameter "chromosome_table" when calling "reconstructor()";
 - [x] create program to read from file;
-
+- [x] create folder for Jupyter notebooks;
+- [ ] eliminate repeated attributes in class diagrams;
 - [ ] create chapter "Usage" with all the examples;
 - [ ] create chapter "Implementation" with class structure, implementation of the Simulator etc.. ;
 - [ ] create chapter "Visualization";
-- [ ] create folder for Jupyter notebooks;
-- [ ] eliminate repeated attributes in class diagrams;
