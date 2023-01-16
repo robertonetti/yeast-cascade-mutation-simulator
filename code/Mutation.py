@@ -1,4 +1,4 @@
-from code.Event import Event
+from Event import Event
 
 class Mutation(Event):
     """

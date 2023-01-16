@@ -1,6 +1,6 @@
-from code.Cell import Cell
-from code.DNA import DNA
-from code.Chromosome import Chromosome
+from Cell import Cell
+from DNA import DNA
+from Chromosome import Chromosome
 
 # WT CELL
 class WT_Cell(Cell):

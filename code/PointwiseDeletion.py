@@ -1,5 +1,5 @@
-from code.Mutation import Mutation
-from code.BinaryTree import Node
+from Mutation import Mutation
+from BinaryTree import Node
 import numpy as np
 
 class PointDeletion(Mutation):

@@ -1,6 +1,8 @@
 import subprocess
 import numpy as np
 
+
+
 class Utility:
     """
     This 'Utility' class contains all the useful function that can be used inside and outside the 
@@ -301,11 +303,11 @@ class Utility:
         In this file each line contains the sequence of the corrsponding chromosome in order from 
         chromosome 1 to the last one.
         """
-        f = open("code/chromosome_list.txt", "r")
+        f = open("../code/chromosome_list.txt", "r")
         chromosome_table = []
         ID = 0
         for line in f:
-            ID+=1
+            ID += 1
             line = line.rstrip()
             chromosome_table.append(tuple([ID, line]))
         return chromosome_table

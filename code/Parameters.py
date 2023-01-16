@@ -1,4 +1,4 @@
-from code.Utility import Utility
+from Utility import Utility
 """
 Module containing all the input parameters of the 'Simulator' class.
 

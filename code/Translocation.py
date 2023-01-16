@@ -1,6 +1,5 @@
-
-from code.Rearrangement import Rearrangement
-from code.BinaryTree import Node
+from Rearrangement import Rearrangement
+from BinaryTree import Node
 import numpy as np 
 
 class Translocation(Rearrangement):

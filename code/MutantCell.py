@@ -1,14 +1,5 @@
-from code.DNA import DNA
-from code.Cell import Cell
-
-from code.PointwiseReplacement import PointReplacement
-from code.PointwiseDeletion import PointDeletion
-from code.PointwiseInsertion import PointInsertion
-from code.Insertion import Insertion
-from code.Deletion import Deletion
-from code.Translocation import Translocation
-from code.ReciprocalTranslocation import ReciprocalTranslocation
-from code.Duplication import Duplication
+from DNA import DNA
+from Cell import Cell
 
 class MUT_Cell(Cell):
     """

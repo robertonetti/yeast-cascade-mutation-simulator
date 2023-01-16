@@ -1,19 +1,19 @@
 import copy
 import numpy as np
 import matplotlib.pyplot as plt
-from code.BinaryTree import Node
-from code.Cell import Cell
-from code.WTCell import WT_Cell
-from code.MutantCell import MUT_Cell
-from code.Utility import Utility
-from code.PointwiseReplacement import PointReplacement
-from code.PointwiseDeletion import PointDeletion
-from code.PointwiseInsertion import PointInsertion
-from code.Insertion import Insertion
-from code.Deletion import Deletion
-from code.Translocation import Translocation
-from code.ReciprocalTranslocation import ReciprocalTranslocation
-from code.Duplication import Duplication
+from BinaryTree import Node
+from Cell import Cell
+from WTCell import WT_Cell
+from MutantCell import MUT_Cell
+from Utility import Utility
+from PointwiseReplacement import PointReplacement
+from PointwiseDeletion import PointDeletion
+from PointwiseInsertion import PointInsertion
+from Insertion import Insertion
+from Deletion import Deletion
+from Translocation import Translocation
+from ReciprocalTranslocation import ReciprocalTranslocation
+from Duplication import Duplication
 
 class Simulator():
     """
@@ -595,7 +595,7 @@ class Simulator():
                 Raises
                 ------
                     Exception
-                        If the chromosome length does not corresponde to the effective length of the
+                        If the chromosome length does not corresponds to the effective length of the
                         sequences.
                 """
             # check if visual in the parent has the correct length
