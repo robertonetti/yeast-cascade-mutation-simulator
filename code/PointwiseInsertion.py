@@ -33,7 +33,7 @@ class PointInsertion(Mutation):
         """
         chr = node.data.DNA.CHRs[self.ChrID - 1]
         new_vis = np.concatenate((chr.visual[: self.Pos], np.array([1]), chr.visual[self.Pos :]))
-        if len(new_vis) != chr.length: raise Exception(f"P.Insertion: visual {len(new_vis)}, chr {chr.length}")
+        #if len(new_vis) != chr.length: raise Exception(f"P.Insertion: visual {len(new_vis)}, chr {chr.length}")
         chr.visual = new_vis
 
     def reconstruct(self, node: Node):

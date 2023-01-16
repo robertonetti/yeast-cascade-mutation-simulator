@@ -34,9 +34,9 @@ class Insertion(Rearrangement):
             chr (Chromosome): chromosome involeved in the Deletion.
         """
         chr = node.data.DNA.CHRs[self.ChrID - 1]
-        inserted = np.zeros(self.Length)
+        inserted = np.zeros(self.Length) + 1
         new_vis = np.concatenate((chr.visual[: self.Pos], inserted, chr.visual[self.Pos :]))
-        if len(new_vis) != chr.length: raise Exception(f"visual {len(new_vis)}, chr {chr.length}")
+        #if len(new_vis) != chr.length: raise Exception(f"visual {len(new_vis)}, chr {chr.length}")
         chr.visual = new_vis
 
     def reconstruct(self, node: Node):

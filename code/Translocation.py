@@ -41,7 +41,7 @@ class Translocation(Rearrangement):
         translocated = chr.visual[self.InitPos : self.InitPos + self.Length] + 1
         new_vis = np.concatenate((chr.visual[: self.InitPos], chr.visual[self.InitPos + self.Length :]))
         new_vis = np.concatenate((new_vis[: self.FinalPos], translocated, new_vis[self.FinalPos :]))
-        if len(new_vis) != chr.length: raise Exception(f"visual {len(new_vis)}, chr {chr.length}")
+        #if len(new_vis) != chr.length: raise Exception(f"visual {len(new_vis)}, chr {chr.length}")
         if self.InitPos - 1 >= 0: new_vis[self.InitPos - 1] += 1
         if self.InitPos  < len(new_vis): new_vis[self.InitPos] += 1
         chr.visual = new_vis

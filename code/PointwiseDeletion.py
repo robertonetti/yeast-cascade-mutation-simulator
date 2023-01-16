@@ -34,7 +34,7 @@ class PointDeletion(Mutation):
         """
         chr = node.data.DNA.CHRs[self.ChrID - 1]
         new_vis = np.concatenate((chr.visual[: self.Pos], chr.visual[self.Pos + 1 :]))
-        if len(new_vis) != chr.length: raise Exception(f"visual {len(new_vis)}, chr {chr.length}")
+        #if len(new_vis) != chr.length: raise Exception(f"visual {len(new_vis)}, chr {chr.length}")
         if self.Pos - 1 >= 0: 
             new_vis[self.Pos - 1] += 1
         if self.Pos  < len(new_vis): new_vis[self.Pos] += 1

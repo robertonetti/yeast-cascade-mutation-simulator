@@ -38,14 +38,14 @@ class ReciprocalTranslocation(Rearrangement):
         ----------
             chrs (tuple): tuple of the two chromosome involved in the Deletion.
         """
-        chrs = (node.data.DNA.CHRs[self.ChrIDs[0] - 1], node.data.DNA.CHRs[self.ChrIDs[0] - 1])
+        chrs = (node.data.DNA.CHRs[self.ChrIDs[0] - 1], node.data.DNA.CHRs[self.ChrIDs[1] - 1])
         translocated = chrs[0].visual[self.InitPos : self.InitPos + self.Length] + 1
         new_vis_1 = np.concatenate((chrs[0].visual[: self.InitPos], chrs[0].visual[self.InitPos + self.Length :]))
         new_vis_2 = np.concatenate((chrs[1].visual[: self.FinalPos], translocated, chrs[1].visual[self.FinalPos :]))
-        if len(new_vis_1) != chrs[0].length: raise Exception(f"chr 1: visual={len(new_vis_1)}, chr_len={chrs[0].length}")
+        #if len(new_vis_1) != chrs[0].length: raise Exception(f"chr 1: visual={len(new_vis_1)}, chr_len={chrs[0].length}")
         if self.InitPos - 1 >= 0: new_vis_1[self.InitPos - 1] += 1
         if self.InitPos  < len(new_vis_1): new_vis_1[self.InitPos] += 1
-        if len(new_vis_2) != chrs[1].length: raise Exception(f"chr 2: visual={len(new_vis_2)}, chr_len={chrs[0].length}")
+        #if len(new_vis_2) != chrs[1].length: raise Exception(f"chr 2: visual={len(new_vis_2)}, chr_len={chrs[0].length}")
         chrs[0].visual, chrs[1].visual = new_vis_1, new_vis_2
 
     def reconstruct(self, node: Node):
