@@ -806,7 +806,7 @@ class Simulator():
                                       (default: int_trunc_uniform)
         """
         n_chr = len(chromosome_table)
-        wt = WT_Cell(n_chr, chromosome_table)
+        wt = WT_Cell(chromosome_table)
         self.chromosome_table = chromosome_table
         self.parent = Node(wt)
         self.generations = n_gen
