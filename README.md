@@ -26,12 +26,14 @@ This project requires the following libraries:
 ## 2. Installation:
 To run the project, simply download the **code** folder. It contains all the necessary files.
 
-## 3. Usage:
+## 3. Implementation:
 
-### 3.1. Data Structure:
-The central structure of the simulation consists of a binary tree. Each node in the tree is thought of as a class containing three attributes: **left**, **right** and **data** (see Binary Tree.py). The first and second attributes are actual nodes and represent the two largest nodes of the parent node. The last attribute **node.data**, contains the corresponding cell.
-From the parent node (containing the initial Wild Type cell), all other nodes in the tree can be accessed.
+### 3.1. Node Class:
+The simulation is implemented on a binary tree structure, where each node stores one cell and all the related information. The node is defined as a class (**Node**) which has three attributes: **left_child**, **right_child** and **data** (see Binary Tree.py). 
+To the **left_child** and **right_child** attributes are assigned one node respectively, and represent the two children nodes of the parent node. The last attribute **data**, contains the corresponding cell.
+From the parent node (containing the initial Wild Type cell), all other nodes in the tree can be accessed (see **3.2. Usage**).
 
+<!--
 ##### Example:
 ```python 
 from Binary Tree import Node
@@ -39,13 +41,14 @@ from Binary Tree import Node
 parent = Node() #define the parent node
 parent.left, parent.right = Node(), Node() #define the doughter nodes
 ```
+-->
 
-### 3.2. Classes Structure:
-In this section I will very quickly explain the structure of the various classes in the project.
+### 3.2. Classes relative to the cell structure:
+In this section I will very quickly explain the structure of the various classes in the project used to collect the information contained in each cell.
 The fundamental class is **Cell** which has two subclasses **WT_Cell** (Wild Type) and **MUT_Cell** (Mutated Cell). Both subclasses have an attribute called **DNA**, which is a class in turn containing a list of the different **Chromosomes**.
-In addition, only the **MUT_Cell** has as another attribute a list of **Event** representing the mutation events that happened to the respective cell. The **Event** class has two subclasses, the first called **Mutation** is in turn subdivided into: **PointwiseDeletion**, **PointwiseInsertion** and **PointwiseReplacement**. These are mutational events involving a single DNA base.
+In addition, only the **MUT_Cell** has as another attribute a list of **Event** representing the mutation events that happened to the respective cell in its cycle. The **Event** class has two subclasses, the first called **Mutation** is in turn subdivided into: **PointwiseDeletion**, **PointwiseInsertion** and **PointwiseReplacement**. These are mutational events involving a single DNA base.
 The other subclass of **Event** is **Rarrangement**, which is divided into:
-**Deletion**, **Insertion**, **Translocation**, **TranslocationReciprocation** and **Duplication**. They can involve many DNA bases and more than one chromosome
+**Deletion**, **Insertion**, **Translocation**, **TranslocationReciprocation** and **Duplication**. They can involve many DNA bases and more than one chromosome.
 #### Simulator & Utility classes:
 ![Simulator](images/Simulator.png)
 #### Cells, DNA & events classes:
@@ -53,14 +56,22 @@ The other subclass of **Event** is **Rarrangement**, which is divided into:
 #### Binary tree classes:
 ![Nodes](images/Nodes.png)
 
-### 3.3. Structure of the Simulator:
-The simulation is divided in two main steps: \
+### 3.3. Implementation of the Simulator:
+The simulation is divided in the following way: \
 **Step 1 (Simulation)**: effective simulation of the cell divisions; \
-**Step 2 (Reconstruction)**: reconstruction of the mutated sequences of the last cell generation or the cell at the end of a selected pathway.
+**Step 2 (Reconstruction)**: reconstruction of the mutated sequences of the last cell generation or the cell at the end of a selected pathway, starting from **Step 1**;
+**Step 3 (Visualization)**: here we use the information collected during **Step 1**, to visualize (for each chromosome of the last generaiton of cells) the number of "cumulated mutations/rearrangements".
+
 #### 3.3.1. Step 1 (Simulation):
-In this step we start with a Wild Type cell. After initializing the class according to the given parameters, we simulate its division up to the selected number of generations. For each cell division we randomly extract the number and types of mutational events occurring in the respective two daughters (during the considered division). The events will be stored in the attribute: **MUT_Cell.events**.
-##### 3.3.1.1 Step 1 (Data Visualization):
-Before launching **Step 1**, it is possible to choose whether the simulation should keep track of the information needed to visualize the result. The data visualization consists of highlighting the positions of the resulting chromosomes that have undergone multiple rearrangements/mutations, as can be seen in the following image:
+In this step we start initializing a Wild Type cell (**WT_Cell** class) and a node (**Node** class). After initializing the the cell according to the given parameters, we assign it to the node. The node will be the root of the binary tree. Next we simulate the cell division up to the selected number of generations. After each cell division we randomly extract the number of mutations/rearrangements (from a Poisson distribution as default) occurring in the two doughter cells. For each mutational event we then extract its type (according to some weights) among the possible: **Deletion**, **Insertion**, **Translocation**, **TranslocationReciprocation**, **Duplication**, **PointwiseDeletion**, **PointwiseInsertion** and **PointwiseReplacement**. The events will be stored in the attribute: **MUT_Cell.events**.
+After **Step 1**, a binary tree is obtained that stores at each node the events that occurred in the corresponding cell between the previous and the next division.
+
+#### 3.3.2. Step 2 (Reconstruction):
+The purpose of **Step 2** is to use the event lists collected in **Step 1** to reconstruct the DNA sequences that actually have mutated (in the last generation of cells) from the Wild Type.
+This process is carried out starting form the root node, using the contained WT cell to reconstruct the two daughters, and repeating the procedure up to the last generation of cell.
+
+##### 3.3.3. Step 3 (Data Visualization):
+The aim of **Step 3** is to give a representation of the number of "cumulated mutations/rearrangements" of each sequence. The process is carried out as in **Step 2** starting from the root and expanding up to the leaves. The data visualization consists of highlighting the positions of the resulting chromosomes that have undergone multiple rearrangements/mutations, as can be seen in the following image:
 ![Visualization](images/Visualization.png)
 Is it possible to activate this option setting in the initialization of the class **Simulator()**:
 ```python
@@ -88,8 +99,7 @@ print(simul.parent.left) # left daughter of the first generation
 print(simul.parent.left.right) # and so on ...
 ```
 
-#### 3.3.2. Step 2 (Reconstruction):
-After **Step 1**, a binary tree is obtained that stores at each node the events that occurred in the corresponding cell between the previous and the next division. The purpose of **Step 2** is to use the event lists to reconstruct the DNA sequences that actually mutated (in the last generation of cells) from the Wild Type.
+
 
 ##### Example 1 (Complete Reconstruction):
 The following example shows how all cells of the last generation are reconstructed.
@@ -195,6 +205,8 @@ random_chromosome_table = Utility.random_seq_initializer(chromosome_lengths)
 - [x] create program to read from file;
 - [x] create folder for Jupyter notebooks;
 - [x] eliminate repeated attributes in class diagrams;
+- [ ] substutute left and right with left_child & right_child in the code;
+- [ ] rename the Binary Tree file as BinaryTree;
 - [ ] create chapter "Usage" with all the examples;
 - [ ] create chapter "Implementation" with class structure, implementation of the Simulator etc.. ;
 - [ ] create chapter "Visualization";
