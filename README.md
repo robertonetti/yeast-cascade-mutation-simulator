@@ -15,9 +15,15 @@ The further goal of the project is to build an algorithm that can reconstruct th
 3. Implementation;
     1. Node Class;
     2. Classes relative to the cell structure;
-    3. Implementation of the Simulator:
+    3. Implementation of the Simulator;
+    4. Utility Class;
 4. Usage;
     1. Chromosome data format and reading from file;
+    2. Node and Wild Type Cell;
+    3. Step 1 - Simulation;
+    4. Step 2 - Reconstruction;
+    5. Step 3 - Visualization;
+    6. Usage of Utility Class;
 5. Notebooks;
 6. Roadmap.
 
@@ -73,12 +79,12 @@ The aim of **Step 3** is to give a representation of the number of "cumulated mu
 The implementation of this process is carried out in the following way. To each chromosome of the WT cell is assigned an array of zeros of the same length of its sequence (called **visual**). Following the hierarchy of the cell duplications, this array is modified in its length according to the occurred mutations/rearrangements, and in the in the positions where an event occured we increase by one the value of the entries.
 We end up with an array for each chromosome, where the larger the value of the entry the higher the number of events cumulated in that position.
 
-### Utility class:
+### 3.4. Utility class:
 The class **Utility** contains different methods necessary for both simulation and testing: methods that communicate with zsh for RAM usage, probability distributions methods, for WT sequences initialization and to read from file.
 
 ## 4. Usage:
 
-### 4.1: Chromosome data format and reading from file:
+### 4.1. Chromosome data format and reading from file:
 The simulator takes as imput the WT chromosome sequences in the following format called **chromosome table**: 
 a list of sequences of tuples, ordered from the first chromosome to the last one. Each tuple is composed by two entries: (chromosome ID: int, DNA sequence: str). 
 
@@ -105,7 +111,7 @@ chromosome_lengths = [int(5e4), int(45e4), int(4e4)] # lengths of the chromosome
 chromosome_table = Utility.random_seq_initializer(chromosome_lengths) 
 ```
 
-### 4.2 Node and Wild Type Cell:
+### 4.2. Node and Wild Type Cell:
 The structure of the binary tree is due to the definition of the class **Node**, and the fact that each node has two doughter nodes as attributes. The third attribute (**data**) contains the respective cell. 
 
 ##### Example (Node and WT cell):
@@ -125,7 +131,7 @@ chromosome_table = Utility.read_file()
 parent.data = WT_Cell(chromosome_table)
 ```
 
-### 4.3 Step 1 - Simulation:
+### 4.3. Step 1 - Simulation:
 The **Step 1** of the simulation is launched when defining an object of the class **Simulation**. This object will contain many attributes, among which the root node of the binary tree, from which the all tree is accessible.
 
 ##### Example (Step 1 - Simulation):
@@ -150,7 +156,7 @@ print(simul.parent.data) # WT cell
 print(simul.parent.left) # left daughter of the first generation
 print(simul.parent.left.right) # and so on ...
 ```
-### 4.4 Step 2 - Reconstruction:
+### 4.4. Step 2 - Reconstruction:
 Once the **Simulation** object has been initialized, the result is a binary tree containing for each node a cell and the list of mutations/rearrangements occured in its cycle. The actual DNA sequence is still not visible. In order to se the actual mutated sequence it is necessary to run the "reconstruction process". The output of the process is to add the mutated sequence on the last generation of cells. These cells are then accessible from the attribute **Simulation.leaves**.
 
 ##### Example 1 (Complete Reconstruction):
@@ -199,7 +205,7 @@ print(f"CHR1,  WT: {chromosome_table[0][1]}")
 print(f"CHR1, leaf: {leaf.data.DNA.CHRs[0].sequence}")
 ```
 
-### 4.4 Step 3 - Visualization:
+### 4.4. Step 3 - Visualization:
 As in **Step 2**, after the initialization of the **Simulation** object the **visual** arrays are empty. In order to see them it is necessary to run the "visualization process". The output of the process is to add the **visual** arrays to the last generation of cells. These cells are then accessible from the attribute **Simulation.leaves**.
 
 ##### Example (Visualization):
@@ -221,7 +227,7 @@ simul.run_visualization(simul.parent, number_of_generations)
 print(f"last generation - CHR1 - visual: {simul.leaves[0].DNA.CHRs[0].visual}")
 ```
 
-### 3.4. Parameters of the Simulator:
+### 3.5. Parameters of the Simulator:
  - **chromosome_table**: List of chromosome sequences with their respective chromosome ID. Each element in the list is a tuple;
  - **number_of_generations**: represents the number of generations you want to simulate in **Step 1**;
  - **average_events_number**: average number of events occurring in a cell during duplication;
@@ -240,16 +246,16 @@ $p(n) = \frac{1}{Z} \cdot e^{-\frac{n}{\tau}}$  where  $Z = e^{-\frac{a}{\tau}} 
  - **chromosome_lengths**: ordered list containing the lengths of the chromosomes considered;
  - **chromosome_number**: total number of chromosomes considered;
 
- ### 3.5. Utility Class:
+### 3.6. Usage of Utility Class:
 Utility is a class that contains several useful methods: some for testing process RAM usage, others that define probability distributions, and still others that help build a random **chromosome_table** (see "Parameters").
 
-### 3.5.1. Methods for RAM usage:
+### 3.6.1. Methods for RAM usage:
 These methods are useful for calculating RAM usage during simulation. It is important to note that they were written to communicate with macOS zsh and to identify the process ID (pid) of "python3.8". They can be easily adapted for use with another operating system and another version of python.
 
-### 3.5.2. Probability Distributions Methods:
+### 3.6.2. Probability Distributions Methods:
 These methods implement probability distributions and can be passed as a parameter to the simulation. The first two (**int_trunc_exp**, **int_trunc_uniform**) use the inverse cumulative method to draw the number of events from truncated distributions, while the last one draws the number of events from a Poisson distribution.
 
-### 3.5.3. Methods for Chromosome Sequences Initialization:
+### 3.6.3. Methods for Chromosome Sequences Initialization:
 The role of these methods is to create a random **chromosomal_table** (see Parameters) when it cannot be given from outside.
 
 
