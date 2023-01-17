@@ -13,17 +13,17 @@ The further goal of the project is to build an algorithm that can reconstruct th
 1. **Requirements**;
 2. **Installation**;
 3. **Implementation**;
-    1. Node Class;
-    2. Classes relative to the cell structure;
-    3. Implementation of the Simulator;
-    4. Utility Class;
+    1. **Node Class**;
+    2. **Classes relative to the cell structure**;
+    3. **Implementation of the Simulator**;
+    4. **Utility Class**;
 4. **Usage**;
-    1. Chromosome data format and reading from file;
-    2. Node and Wild Type Cell;
-    3. Step 1 - Simulation;
-    4. Step 2 - Reconstruction;
-    5. Step 3 - Visualization;
-    6. Usage of Utility Class;
+    1. **Chromosome data format and reading from file**;
+    2. **Node and Wild Type Cell**;
+    3. **Step 1 - Simulation**;
+    4. **Step 2 - Reconstruction**;
+    5. **Step 3 - Visualization**;
+    6. **Usage of Utility Class**;
 5. **Notebooks**;
 6. **Roadmap**.
 
