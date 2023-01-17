@@ -23,7 +23,8 @@ The further goal of the project is to build an algorithm that can reconstruct th
     3. **Step 1 - Simulation**;
     4. **Step 2 - Reconstruction**;
     5. **Step 3 - Visualization**;
-    6. **Usage of Utility Class**;
+    6. **Parameters of the Simulator**;
+    7. **Usage of Utility Class**;
 5. **Notebooks**;
 6. **Roadmap**.
 
@@ -205,7 +206,7 @@ print(f"CHR1,  WT: {chromosome_table[0][1]}")
 print(f"CHR1, leaf: {leaf.data.DNA.CHRs[0].sequence}")
 ```
 
-### 4.4. Step 3 - Visualization:
+### 4.5. Step 3 - Visualization:
 As in **Step 2**, after the initialization of the **Simulation** object the **visual** arrays are empty. In order to see them it is necessary to run the "visualization process". The output of the process is to add the **visual** arrays to the last generation of cells. These cells are then accessible from the attribute **Simulation.leaves**.
 
 ##### Example (Visualization):
@@ -227,7 +228,7 @@ simul.run_visualization(simul.parent, number_of_generations)
 print(f"last generation - CHR1 - visual: {simul.leaves[0].DNA.CHRs[0].visual}")
 ```
 
-### 3.5. Parameters of the Simulator:
+### 4.6. Parameters of the Simulator:
  - **chromosome_table**: List of chromosome sequences with their respective chromosome ID. Each element in the list is a tuple;
  - **number_of_generations**: represents the number of generations you want to simulate in **Step 1**;
  - **average_events_number**: average number of events occurring in a cell during duplication;
@@ -246,19 +247,31 @@ $p(n) = \frac{1}{Z} \cdot e^{-\frac{n}{\tau}}$  where  $Z = e^{-\frac{a}{\tau}} 
  - **chromosome_lengths**: ordered list containing the lengths of the chromosomes considered;
  - **chromosome_number**: total number of chromosomes considered;
 
-### 3.6. Usage of Utility Class:
+### 4.7. Usage of Utility Class:
 Utility is a class that contains several useful methods: some for testing process RAM usage, others that define probability distributions, and still others that help build a random **chromosome_table** (see "Parameters").
 
-### 3.6.1. Methods for RAM usage:
+### 4.7.1. Methods for RAM usage:
 These methods are useful for calculating RAM usage during simulation. It is important to note that they were written to communicate with macOS zsh and to identify the process ID (pid) of "python3.8". They can be easily adapted for use with another operating system and another version of python.
 
-### 3.6.2. Probability Distributions Methods:
+### 4.7.2. Probability Distributions Methods:
 These methods implement probability distributions and can be passed as a parameter to the simulation. The first two (**int_trunc_exp**, **int_trunc_uniform**) use the inverse cumulative method to draw the number of events from truncated distributions, while the last one draws the number of events from a Poisson distribution.
 
-### 3.6.3. Methods for Chromosome Sequences Initialization:
+### 4.7.3. Methods for Chromosome Sequences Initialization:
 The role of these methods is to create a random **chromosomal_table** (see Parameters) when it cannot be given from outside.
 
+## 5. Notebooks:
 
+### 5.1. Simulation Test:
+In this notebook it has been run only **Step 1** of the Simulator. After the simulation it has been compared the *initial genome length* with the *average genome length* over the last generation cells. In addition it has been plot the *average chromosome length* of the last generation and its standard deviation for each of the chromosomes.
+These informations can be useful to test the simulator and compare it to the real experiments.
+
+### 5.2. RAM Usage and Time Elapsed Test:
+This notebook is fundamental to understand both the memory and the time needed for a full simulation. **Step 1** and the *complete reconstruction* of **Step 2** has been launched for different number of generations. From the plots it is clear that both time elapsed and memory grow as a power low of the number of generation. In particular, as expected, it is not difficult to show that they increase $~2^{n}$ with $n=\text{number of generations}$. 
+
+### 5.3. Path Reconstruction Test:
+This test consists in the reconstruction of the sequences of a given path, after the simulation process (**Step 1**).
+
+###
 
 ## Roadmap:
 - [x] documentation;
@@ -279,8 +292,9 @@ The role of these methods is to create a random **chromosomal_table** (see Param
 - [x] create program to read from file;
 - [x] create folder for Jupyter notebooks;
 - [x] eliminate repeated attributes in class diagrams;
+- [x] rename the Binary Tree file as BinaryTree;
+- [x] create chapter "Usage" with all the examples;
+- [x] create chapter "Implementation" with class structure, implementation of the Simulator etc.. ;
+- [ ] create chapter "Notebooks";
 - [ ] substutute left and right with left_child & right_child in the code;
-- [ ] rename the Binary Tree file as BinaryTree;
-- [ ] create chapter "Usage" with all the examples;
-- [ ] create chapter "Implementation" with class structure, implementation of the Simulator etc.. ;
-- [ ] create chapter "Visualization";
+- [ ] check the grammar of the readme;
