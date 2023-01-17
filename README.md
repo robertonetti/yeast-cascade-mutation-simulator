@@ -5,11 +5,14 @@ A single DNA damage event, such as a chromosome breakage in mitosis can be the c
 
 This project is designed to emulate the genome instability results obtained in experiments. Specifically, a single Wild Type yeast cell first suffers irreparable artificial DNA damage and then, through adaptation, begins to divide, producing the cascade effect of mutations mentioned above.
 
+<!---
 The further goal of the project is to build an algorithm that can reconstruct the history of the cascade process from the genomic spectrum resulting from the experiments. The role of the simulator will be to provide insights into the development of the algorithm and to test its capabilities.
+--->
 
 ## Table of Contents:
 1. Requirements;
 2. Installation;
+3. Implementation;
 4. Usage;
 5. Roadmap.
 
