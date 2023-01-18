@@ -271,9 +271,14 @@ This notebook is fundamental to understand both the memory and the time needed f
 ### 5.3. Path Reconstruction Test:
 This test consists in the reconstruction of the sequences of a given path, after the simulation process (**Step 1**).
 
-###
+### 5.4. Visualization Test:
+This test consists in running the *"visualization process"* of the sequences after the simulation process (**Step 1**).
 
-## Roadmap:
+### 5.5. Parameters Test:
+The purpose of this test is to understand which parameters ranges distinguish between the regime in which mutations are not overlapping (thus easily distinguishable) and the regime in which they are overlapping (reconstruction is required).\
+In this test we run the simulation for different *average number of events* and we compare the average number of cumulated events.
+
+## 6. Roadmap:
 - [x] documentation;
 - [x] github repository;
 - [x] RAM usage test;
@@ -295,6 +300,6 @@ This test consists in the reconstruction of the sequences of a given path, after
 - [x] rename the Binary Tree file as BinaryTree;
 - [x] create chapter "Usage" with all the examples;
 - [x] create chapter "Implementation" with class structure, implementation of the Simulator etc.. ;
-- [ ] create chapter "Notebooks";
+- [x] create chapter "Notebooks";
 - [ ] substutute left and right with left_child & right_child in the code;
 - [ ] check the grammar of the readme;

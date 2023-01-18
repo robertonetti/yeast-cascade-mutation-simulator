@@ -370,8 +370,8 @@ class Simulator():
 
         Returns
         -------
-            node.left (Cell): left doughter cell of the parent one, with the its list of events.
-            node.right (Cell): right doughter cell of the parent one, with the its list of events.
+            node.left_child (Cell): left doughter cell of the parent one, with the its list of events.
+            node.right_child (Cell): right doughter cell of the parent one, with the its list of events.
         """
         new_generation = node.generation + 1
         new_left = MUT_Cell(copy.deepcopy(node.data.DNA), [], new_generation)
@@ -384,9 +384,9 @@ class Simulator():
         for j in range(n_event_right): self.random_choice(new_right, cumulative_list, \
             del_len_distrib, ins_len_distrib, transl_len_distrib, rec_transl_len_distrib, \
                 dupl_len_distrib)
-        node.left = Node(new_left, new_generation)
-        node.right = Node(new_right, new_generation)
-        return node.left, node.right
+        node.left_child = Node(new_left, new_generation)
+        node.right_child = Node(new_right, new_generation)
+        return node.left_child, node.right_child
 
     def growth(self, node :Node, n_generations :int, ave_events_num: int, cumulative_list: list,\
                 n_event_method, del_len_distrib, ins_len_distrib, transl_len_distrib, \
@@ -508,7 +508,7 @@ class Simulator():
             else:
                 if type(parent.data) == WT_Cell: 
                     self.WT_sequence_initializer(parent.data)
-                doughter1, doughter2 = parent.left, parent.right
+                doughter1, doughter2 = parent.left_child, parent.right_child
                 self.single_doughter_reconstructor(parent, doughter1)
                 self.single_doughter_reconstructor(parent, doughter2)
                 # delete parent sequence
@@ -528,7 +528,7 @@ class Simulator():
 
         Parameters
         ----------
-            path (list): list of 0 or 1. 0 corresponds to "left", 1 to "right".
+            path (list): list of 0 or 1. 0 corresponds to "left_child", 1 to "right_child".
             
         Returns
         -------
@@ -548,17 +548,17 @@ class Simulator():
             self.WT_sequence_initializer(current_node.data)
         for direction in path:
             if direction == 0: 
-                self.single_doughter_reconstructor(current_node, current_node.left)
+                self.single_doughter_reconstructor(current_node, current_node.left_child)
                 # delete parent sequence
                 for chr in current_node.data.DNA.CHRs:
                     chr.sequence = []
-                current_node = current_node.left
+                current_node = current_node.left_child
             elif direction == 1: 
-                self.single_doughter_reconstructor(current_node, current_node.right)
+                self.single_doughter_reconstructor(current_node, current_node.right_child)
                 # delete parent sequence
                 for chr in current_node.data.DNA.CHRs:
                     chr.sequence = []
-                current_node = current_node.right
+                current_node = current_node.right_child
         return current_node
 
 ## VISUALIZATION ####################################################################################
@@ -635,7 +635,7 @@ class Simulator():
                 if type(parent.data) == WT_Cell: 
                     for chr in parent.data.DNA.CHRs:
                         chr.visual = np.zeros(chr.length)
-                doughter1, doughter2 = parent.left, parent.right
+                doughter1, doughter2 = parent.left_child, parent.right_child
                 single_doughter_visualizetor(parent, doughter1), single_doughter_visualizetor(parent, doughter2)
             # deletion of the parent visual array
                 for chr in parent.data.DNA.CHRs:

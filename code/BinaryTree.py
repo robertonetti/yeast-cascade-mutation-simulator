@@ -12,9 +12,9 @@ class Node():
         It is the content of the node. In this case a cell.
     generation: int
         It is the number corresponding to the generation of the node.
-    left: Node
+    left_child: Node
         Left doughter node of the current node.
-    right: Node
+    right_child: Node
         Right doughter node of the current node.
 
     Methods
@@ -49,11 +49,11 @@ class Node():
         self.data = data
         self.generation = generation
 
-    left = None
-    right = None
+    left_child = None
+    right_child = None
     
     def __repr__(self):
-        return f"{self.data}\n      --- {type(self.right)}\n      --- {type(self.left)}"
+        return f"{self.data}\n      --- {type(self.right_child)}\n      --- {type(self.left_child)}"
 
     def __str__(self):
-        return f"{self.data}\n      --- {type(self.right)}\n      --- {type(self.left)}"
+        return f"{self.data}\n      --- {type(self.right_child)}\n      --- {type(self.left_child)}"
